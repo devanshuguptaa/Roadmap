@@ -82,6 +82,11 @@ body{background-color:#fffaf2;background-image:radial-gradient(circle at 7% 4%,r
 .visual-step{border:1px solid #ebe4d8;background:#fff;border-radius:11px;padding:9px;font-size:10px;line-height:1.4;color:#778590}
 .visual-step b{display:block;color:#b86b48;font-size:9px;letter-spacing:.08em;margin-bottom:3px}
 .visual-tip{font-size:11px;line-height:1.55;color:#72828a;margin:0}
+.visual-step{animation:vstep 6s infinite}
+.visual-step:nth-child(2){animation-delay:2s}
+.visual-step:nth-child(3){animation-delay:4s}
+@keyframes vstep{0%,28%{background:#fff;border-color:#ebe4d8;transform:translateY(0)}8%,20%{background:#fff0df;border-color:#e7b887;transform:translateY(-2px)}36%,100%{background:#fff;border-color:#ebe4d8;transform:translateY(0)}}
+
 .visual-foot{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-top:12px}
 .visual-loop{font-size:9px;color:#81908f;font-weight:900;letter-spacing:.07em}
 .visual-replay{border:1px solid #e5c7a7;border-radius:999px;background:#fff2e3;color:#a65e45;padding:8px 13px;font-size:11px;font-weight:900}
@@ -479,7 +484,7 @@ function openVisualDemo(topic,cfg){
  const close=create('button','visual-close','×');close.type='button';close.setAttribute('aria-label','Close visualisation');close.addEventListener('click',closeVisualDemo);head.append(titles,close);
  const stage=create('div','visual-stage');stage.innerHTML=visualSceneMarkup(cfg.kind);
  const steps=create('div','visual-steps');cfg.steps.forEach((x,i)=>{const el=create('div','visual-step');el.append(create('b','','STEP 0'+(i+1)),document.createTextNode(x));steps.append(el);});
- const tip=create('p','visual-tip',cfg.tip),foot=create('div','visual-foot'),loop=create('span','visual-loop','AUTOPLAYS · QUIET LOOP · NO AUDIO'),replay=create('button','visual-replay','↻ Replay');replay.type='button';replay.addEventListener('click',()=>{const html=stage.innerHTML;stage.innerHTML='';stage.innerHTML=html;});foot.append(loop,replay);
+ const tip=create('p','visual-tip',cfg.tip),foot=create('div','visual-foot'),loop=create('span','visual-loop','AUTOPLAYS · QUIET LOOP · NO AUDIO'),replay=create('button','visual-replay','↻ Replay');replay.type='button';replay.addEventListener('click',()=>{[stage,steps].forEach(target=>{const html=target.innerHTML;target.innerHTML='';target.innerHTML=html;});});foot.append(loop,replay);
  dialog.append(head,stage,steps,tip,foot);overlay.append(dialog);overlay.addEventListener('click',e=>{if(e.target===overlay)closeVisualDemo();});document.body.append(overlay);activeVisualModal=overlay;document.addEventListener('keydown',visualEscapeHandler);close.focus();
 }
 
