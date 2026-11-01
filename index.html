@@ -632,6 +632,15 @@ function buildVisualLesson(topic,dayNo){
    step('The last index is reachable','The target index 4 is no farther than the frontier. The greedy scan reaches the end.',lessonArray([2,3,1,1,4],[4],[],['4 ≤ farthest 4','return True']),'return True','The farthest-reachable invariant makes this linear: O(n).')
   ]);
  }
+
+ if(dayNo===27&&has('2d/grid dp','coin change','knapsack','lcs','dp state design')){
+  return lesson('2D DP: longest common subsequence','dp[i][j] stores the LCS length for the first i characters of A and first j characters of B. Matching characters extend the diagonal; otherwise take the larger neighbour.','A = "abcde"\nB = "ace"\ndp = [[0]*(len(B)+1) for _ in range(len(A)+1)]\nfor i in range(1, len(A)+1):\n    for j in range(1, len(B)+1):\n        if A[i-1] == B[j-1]:\n            dp[i][j] = 1 + dp[i-1][j-1]\n        else:\n            dp[i][j] = max(dp[i-1][j], dp[i][j-1])',[
+   step('Define the DP table','Rows represent prefixes of abcde and columns represent prefixes of ace. The first row and column are zero because an empty string has no common subsequence.',lessonTable(['','∅','a','c','e'],[['∅','0','0','0','0'],['a','0','?','?','?'],['b','0','?','?','?'],['c','0','?','?','?'],['d','0','?','?','?'],['e','0','?','?','?']]),'dp = [[0]*(len(B)+1) for _ in range(len(A)+1)]','The state is a prefix pair.'),
+   step('Characters match','At A[0] = a and B[0] = a, the characters match. Extend the diagonal answer: dp[1][1] = 1.',lessonTable(['','∅','a','c','e'],[['∅','0','0','0','0'],['a','0','1','?','?'],['b','0','?','?','?'],['c','0','?','?','?'],['d','0','?','?','?'],['e','0','?','?','?']]),'if A[i-1] == B[j-1]:\n    dp[i][j] = 1 + dp[i-1][j-1]','A matching pair extends the best shorter prefix by one.'),
+   step('Characters differ','For b against a, there is no new shared character. Carry forward the best result from the cell above or left.',lessonTable(['','∅','a','c','e'],[['∅','0','0','0','0'],['a','0','1','?','?'],['b','0','1','?','?'],['c','0','?','?','?'],['d','0','?','?','?'],['e','0','?','?','?']]),'else:\n    dp[i][j] = max(dp[i-1][j], dp[i][j-1])','When characters differ, skip one of them.'),
+   step('Complete the table','After filling every cell, the bottom-right value is 3. One longest common subsequence is ace.',lessonTable(['','∅','a','c','e'],[['∅','0','0','0','0'],['a','0','1','1','1'],['b','0','1','1','1'],['c','0','1','2','2'],['d','0','1','2','2'],['e','0','1','2','3']]),'return dp[len(A)][len(B)]','The table has O(m × n) states and each takes O(1) work.')
+  ]);
+ }
  if(dayNo===26||dayNo===27||has('dynamic programming','memoization','tabulation','1d dp','2d/grid dp','state/transition','knapsack','lcs','coin change','choose/skip')){
   return lesson('Dynamic programming: House Robber','At each house, either skip it and keep the previous best, or rob it and add its value to the best from two houses back.', 'nums = [2, 7, 9, 3, 1]\ndp = [0] * (len(nums) + 1)\nfor i, value in enumerate(nums, 1):\n    dp[i] = max(dp[i-1], value + dp[i-2])\nreturn dp[-1]',[
    step('Define the state','dp[i] means the maximum amount we can rob from the first i houses. The first two answers are 0 and 2.',lessonTable(['Houses considered','0','1','2','3','4','5'],[['dp','0','2','?','?','?','?']]),'dp[0] = 0\ndp[1] = nums[0]','The meaning of the state must be clear before the recurrence.'),
@@ -648,6 +657,14 @@ function buildVisualLesson(topic,dayNo){
    step('Test and explain','Check duplicates, negative values, and the smallest valid input. Then explain why the map lookup is correct and state time and space costs.',lessonMap([['normal','[2,7] → 9'],['duplicate','[3,3] → 6'],['negative','[-1,4] → 3'],['cost','O(n) time / O(n) space']]),'Test edge cases before submitting.','A strong interview answer includes reasoning, not only working code.')
   ]);
  }
+
+ if(has('substring vs subsequence'))return lesson('Substring vs subsequence','A substring is contiguous. A subsequence keeps the original order but may skip characters.','s = "ABCDE"\nsubstring = s[1:4]   # "BCD"\nsubsequence = s[1] + s[3] + s[4]  # "BDE"',[
+  step('Start with the original string','The source is A B C D E. Selected characters must keep this left-to-right order.',lessonArray(['A','B','C','D','E'],[],[],['source = ABCDE']),'s = "ABCDE"','Positions are 0 through 4.'),
+  step('Select a substring','Choose B, C and D. They sit next to each other with no gaps, so BCD is a substring.',lessonArray(['A','B','C','D','E'],[1,2,3],[],['selected = BCD','contiguous ✓']),'substring = s[1:4]','A substring occupies one continuous range.'),
+  step('Select a subsequence','Choose B, D and E. The order is preserved, but C is skipped. BDE is a subsequence, not a substring.',lessonArray(['A','B','C','D','E'],[1,3,4],[],['selected = BDE','C is skipped']),'subsequence = s[1] + s[3] + s[4]','A subsequence can skip positions but cannot reorder them.'),
+  step('Compare the rule','BCD is both a substring and a subsequence. BDE is only a subsequence because its positions are not contiguous.',lessonMap([['BCD','substring + subsequence'],['BDE','subsequence only'],['order','preserved']]),'substring: contiguous\nsubsequence: ordered, may skip','This distinction matters in longest common substring vs subsequence.')
+ ]);
+
  if(has('palindrome','character scans','substring','subsequence','string building','string')){
   return lesson('Strings: check a palindrome with two pointers','A palindrome reads the same in both directions. Compare the leftmost and rightmost characters, then move inward.', 's = "racecar"\nleft, right = 0, len(s) - 1\nwhile left < right:\n    if s[left] != s[right]:\n        return False\n    left += 1\n    right -= 1\nreturn True',[
    step('Place pointers at the ends','For racecar, left points to r and right points to r. They are the characters that must match first.',lessonArray(['r','a','c','e','c','a','r'],[0,6],[],['left = 0','right = 6']),'left = 0\nright = len(s) - 1','A mismatch would immediately prove it is not a palindrome.'),
