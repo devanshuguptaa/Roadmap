@@ -105,10 +105,30 @@ let searchTerm = '';
 let openPhase = 0;
 let state = loadState();
 function blankState(){ return {done:{}, problems:[], notes:'', pace:'12', activeDays:[]}; }
+function sanitizeState(source){
+  const s=blankState();
+  if(!source || typeof source!=='object' || Array.isArray(source)) return s;
+  const validIds=new Set(allTopics().map(t=>t.id));
+  if(source.done && typeof source.done==='object' && !Array.isArray(source.done)){
+    for(const [id,value] of Object.entries(source.done)){if(validIds.has(id) && value===true)s.done[id]=true;}
+  }
+  if(Array.isArray(source.problems)){
+    s.problems=source.problems.slice(-5000).filter(p=>p && typeof p==='object' && !Array.isArray(p) && typeof p.name==='string' && p.name.trim()).map((p,i)=>({
+      id:typeof p.id==='string' && p.id.length<=100?p.id:'imported-'+i,
+      name:p.name.trim().slice(0,90),
+      difficulty:['Easy','Medium','Hard'].includes(p.difficulty)?p.difficulty:'Easy',
+      status:['solved','attempted','review'].includes(p.status)?p.status:'attempted',
+      date:typeof p.date==='string' && /^\\d{4}-\\d{2}-\\d{2}$/.test(p.date)?p.date:''
+    }));
+  }
+  s.notes=typeof source.notes==='string'?source.notes.slice(0,20000):'';
+  s.pace=['8','12','16'].includes(String(source.pace))?String(source.pace):'12';
+  s.activeDays=Array.isArray(source.activeDays)?[...new Set(source.activeDays.filter(x=>typeof x==='string' && /^\\d{4}-\\d{2}-\\d{2}$/.test(x)))].sort().slice(-400):[];
+  return s;
+}
 function loadState(){
-  try { const raw=localStorage.getItem(KEY); if(!raw) return blankState(); const parsed=JSON.parse(raw); if(!parsed || typeof parsed!=='object') return blankState();
-    const s=blankState(); s.done=parsed.done && typeof parsed.done==='object' ? parsed.done : {}; s.problems=Array.isArray(parsed.problems)?parsed.problems:[]; s.notes=typeof parsed.notes==='string'?parsed.notes:''; s.pace=['8','12','16'].includes(String(parsed.pace))?String(parsed.pace):'12'; s.activeDays=Array.isArray(parsed.activeDays)?parsed.activeDays.filter(x=>typeof x==='string').slice(-400):[]; return s;
-  } catch(err){ return blankState(); }
+  try { const raw=localStorage.getItem(KEY); if(!raw) return blankState(); return sanitizeState(JSON.parse(raw)); }
+  catch(err){ return blankState(); }
 }
 function saveState(){ try{localStorage.setItem(KEY,JSON.stringify(state));}catch(err){showToast('Browser storage is full or unavailable. Export a backup to keep your progress.');} }
 function localDateKey(d=new Date()){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`;}
@@ -143,7 +163,23 @@ const plans={
 };
 function renderMySpace(){ $('paceSelect').value=state.pace;$('notesBox').value=state.notes;const root=$('weekPlan');root.replaceChildren();(plans[state.pace]||plans['12']).forEach(([week,topic])=>{const el=create('div','week');el.append(create('b','',week),create('span','',topic));root.append(el);});}
 function exportBackup(){const backup={app:'Shivanya Grand Line DSA',version:2,exportedAt:new Date().toISOString(),state};const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=create('a');a.href=url;a.download='shivanya-grand-line-progress.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);showToast('Progress backup downloaded ✨');}
-function importBackup(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(String(reader.result));const source=data.state||data;if(!source||typeof source!=='object'||!source.done||!Array.isArray(source.problems))throw new Error('Invalid backup');state={...blankState(),done:source.done,problems:source.problems,notes:typeof source.notes==='string'?source.notes:'',pace:['8','12','16'].includes(String(source.pace))?String(source.pace):'12',activeDays:Array.isArray(source.activeDays)?source.activeDays:[]};saveState();renderRoadmap();renderStats();renderProblems();renderMySpace();updateMission();showToast('Backup imported on this device ✓');}catch(err){showToast('That file does not look like a valid DSA backup.');}};reader.readAsText(file);}
+function importBackup(file){
+  if(!file)return;
+  if(file.size>2*1024*1024){showToast('Backup is too large. Choose a file under 2 MB.');return;}
+  const reader=new FileReader();
+  reader.onerror=()=>showToast('Could not read that backup file. Try selecting it again.');
+  reader.onload=()=>{
+    try{
+      const data=JSON.parse(String(reader.result));
+      const source=data && typeof data==='object' ? (data.state||data) : null;
+      if(!source || typeof source!=='object' || !source.done || !Array.isArray(source.problems))throw new Error('Invalid backup');
+      state=sanitizeState(source);
+      saveState();renderRoadmap();renderStats();renderProblems();renderMySpace();updateMission();
+      showToast('Backup imported on this device ✓');
+    }catch(err){showToast('That file does not look like a valid DSA backup.');}
+  };
+  reader.readAsText(file);
+}
 function pickFocus(){const remaining=allTopics().filter(t=>!state.done[t.id]);const options=remaining.length?remaining:allTopics();const choice=options[Math.floor(Math.random()*options.length)];openPhase=choice.phase;filterMode='all';$('topicSearch').value='';searchTerm='';document.querySelectorAll('[data-filter]').forEach(b=>b.classList.toggle('active',b.dataset.filter==='all'));showView('roadmap');renderRoadmap();const element=document.getElementById('topic-'+choice.id);if(element){element.scrollIntoView({behavior:'smooth',block:'center'});element.focus({preventScroll:true});}showToast('Your next charted stop: '+choice.name);}
 function addProblem(event){event.preventDefault();const name=$('problemName').value.trim();if(!name){showToast('Add a problem name first.');return;}state.problems.push({id:String(Date.now())+'-'+Math.random().toString(36).slice(2,8),name:name.slice(0,90),difficulty:$('problemDifficulty').value,status:$('problemStatus').value,date:localDateKey()});markActive();saveState();$('problemForm').reset();renderProblems();renderStats();showToast('Problem added to your log 🧡');}
 function sharePage(){const url=location.href;if(!url||url==='about:blank'){showToast('Publish the page first, then share its URL.');return;}if(navigator.share){navigator.share({title:document.title,text:'Shivanya’s Python DSA roadmap',url}).catch(()=>{});return;}if(navigator.clipboard&&location.protocol!=='file:'){navigator.clipboard.writeText(url).then(()=>showToast('Page link copied ✨')).catch(()=>showToast('Copy the page URL from your browser address bar.'));}else{showToast('After publishing, copy the website URL to share it.');}}
