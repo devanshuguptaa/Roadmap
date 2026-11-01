@@ -64,68 +64,83 @@ body{background-color:#fffaf2;background-image:radial-gradient(circle at 7% 4%,r
 @media(max-width:390px){.sprint-subtopic-actions{grid-template-columns:1fr}.subtopic-resource.visual{grid-column:auto}.sprint-subtopic-item>summary{font-size:11px}}
 
 
-/* Self-contained six-second visual demos: these are diagrams, not lesson videos. */
-.subtopic-resource.visual{cursor:pointer;text-align:left;font:inherit;width:100%}
-.subtopic-resource.visual .subtopic-resource-copy b:after{content:" · 6-SECOND VISUAL";font-size:8px;letter-spacing:.06em;color:#4b8a7d}
-.visual-modal-overlay{position:fixed;inset:0;z-index:1000;background:#152b3799;backdrop-filter:blur(7px);display:grid;place-items:center;padding:13px;animation:vizFade .18s}
-.visual-dialog{width:min(620px,100%);max-height:90vh;overflow:auto;background:#fffaf3;border:1px solid #f0dec8;border-radius:23px;box-shadow:0 28px 90px #10293855;padding:clamp(16px,3vw,24px)}
-.visual-dialog-head{display:flex;justify-content:space-between;gap:12px}
-.visual-kicker{font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:900;color:#bd7049}
-.visual-dialog h3{font:700 26px/1.15 'Playfair Display',Georgia,serif;color:#1c455b;margin:6px 0}
-.visual-sub{font-size:11px;color:#778794;margin:0;line-height:1.5}
-.visual-close{border:1px solid #eadfce;background:white;color:#547080;border-radius:12px;width:36px;height:36px;font-size:19px;flex:0 0 36px}
-.visual-stage{height:218px;margin:16px 0 11px;position:relative;overflow:hidden;border:1px solid #e4e9df;border-radius:17px;background:linear-gradient(145deg,#f3faf6,#fff6e8);display:flex;align-items:center;justify-content:center;padding:14px;color:#21465a}
-.visual-stage:before{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(#397d7d0b 1px,transparent 1px),linear-gradient(90deg,#397d7d0b 1px,transparent 1px);background-size:24px 24px}
-.visual-stage>*{position:relative;z-index:1}
-.visual-caption{font-size:9px;color:#7b8d94;font-weight:900;letter-spacing:.07em;text-transform:uppercase;text-align:center;margin-top:12px}
-.visual-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:11px 0}
-.visual-step{border:1px solid #ebe4d8;background:#fff;border-radius:11px;padding:9px;font-size:10px;line-height:1.4;color:#778590}
-.visual-step b{display:block;color:#b86b48;font-size:9px;letter-spacing:.08em;margin-bottom:3px}
-.visual-tip{font-size:11px;line-height:1.55;color:#72828a;margin:0}
-.visual-step{animation:vstep 6s infinite}
-.visual-step:nth-child(2){animation-delay:2s}
-.visual-step:nth-child(3){animation-delay:4s}
-@keyframes vstep{0%,28%{background:#fff;border-color:#ebe4d8;transform:translateY(0)}8%,20%{background:#fff0df;border-color:#e7b887;transform:translateY(-2px)}36%,100%{background:#fff;border-color:#ebe4d8;transform:translateY(0)}}
 
-.visual-foot{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-top:12px}
-.visual-loop{font-size:9px;color:#81908f;font-weight:900;letter-spacing:.07em}
-.visual-replay{border:1px solid #e5c7a7;border-radius:999px;background:#fff2e3;color:#a65e45;padding:8px 13px;font-size:11px;font-weight:900}
-.vrow{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:nowrap}
-.vcell{min-width:35px;height:39px;border:1px solid #d8e6dc;background:white;border-radius:9px;display:grid;place-items:center;font-size:12px;font-weight:900;color:#34596a;animation:vscan 6s infinite;animation-delay:calc(var(--i)*.55s)}
-.vwrap{width:100%;max-width:430px}
-.vlabels{display:flex;justify-content:space-between;margin:9px 7% 0;font-size:9px;font-weight:900;color:#bf704b}
-.vwindow{position:absolute;left:13%;top:47px;width:43%;height:43px;border:2px solid #dd9666;border-radius:10px;background:#f9d9b755;animation:vwindow 6s infinite}
-.vnodes{display:flex;justify-content:center;align-items:center;gap:0}
-.vnode{width:52px;height:45px;background:white;border:1px solid #cfe3da;border-radius:10px;display:grid;place-items:center;font-size:12px;font-weight:900;animation:vscan 6s infinite;animation-delay:calc(var(--i)*.7s);position:relative}
-.vnode:not(:last-child):after{content:'→';position:absolute;left:calc(100% + 1px);color:#b96b48;font-size:15px;z-index:2}
-.vstack{height:155px;width:135px;display:flex;flex-direction:column-reverse;gap:4px;align-items:center;border-bottom:4px solid #6c9990;padding:6px}
-.vstack span{height:28px;width:100%;display:grid;place-items:center;border-radius:7px;background:white;border:1px solid #cfe3da;font-size:11px;font-weight:900;animation:vscan 6s infinite}
-.vqueue{display:flex;gap:5px;justify-content:center}
-.vqueue span{width:48px;height:41px;display:grid;place-items:center;background:white;border:1px solid #cfe3da;border-radius:9px;font-weight:900;animation:vqueue 6s infinite}
-.vqueue span:nth-child(2){animation-delay:.15s}.vqueue span:nth-child(3){animation-delay:.3s}
-.vbars{height:145px;display:flex;align-items:flex-end;gap:8px;border-bottom:2px solid #91b5a9;padding:0 20px 3px}
-.vbar{width:26px;height:var(--h);border-radius:7px 7px 2px 2px;background:linear-gradient(#edaa68,#72b7a5);transform-origin:bottom;animation:vbar 6s infinite;animation-delay:calc(var(--i)*.3s)}
-.vtree{display:grid;justify-items:center;gap:9px}
-.vlevel{display:flex;justify-content:center;gap:22px}
-.vcircle{width:37px;height:34px;border-radius:50%;border:2px solid #83b7a7;background:white;display:grid;place-items:center;font-size:10px;font-weight:900;animation:vscan 6s infinite;animation-delay:var(--d)}
-.vgraph{width:270px;height:160px;position:relative}
-.vgraph svg{position:absolute;inset:0;width:100%;height:100%}
-.vgraph line{stroke:#a9c9bb;stroke-width:3}
-.vgraph b{position:absolute;width:32px;height:32px;border-radius:50%;border:2px solid #83b7a7;background:white;display:grid;place-items:center;font-size:10px;animation:vscan 6s infinite;animation-delay:var(--d)}
-.vdp{display:grid;grid-template-columns:repeat(4,44px);gap:5px}
-.vdp span{height:38px;border:1px solid #d3e4d9;background:white;border-radius:7px;display:grid;place-items:center;font-size:10px;font-weight:900;animation:vscan 6s infinite;animation-delay:calc(var(--i)*.38s)}
-.vcomplex{width:min(400px,100%);display:grid;gap:11px}
-.vcomplex div{display:grid;grid-template-columns:55px 1fr;gap:8px;align-items:center;font-size:10px;font-weight:900}
-.vcomplex i{height:13px;background:#e8eee8;border-radius:20px;overflow:hidden}
-.vcomplex em{display:block;height:100%;width:var(--w);border-radius:20px;background:linear-gradient(90deg,#79b7a6,#e8a16d);transform-origin:left;animation:vgrow 6s infinite}
-@keyframes vizFade{from{opacity:0}to{opacity:1}}
-@keyframes vscan{0%,13%,100%{background:white;box-shadow:none;transform:translateY(0)}22%,42%{background:#ffe5c7;box-shadow:0 4px 13px #dd9a5b44;transform:translateY(-3px)}}
-@keyframes vwindow{0%,10%{transform:translateX(0)}45%,62%{transform:translateX(75%)}90%,100%{transform:translateX(0)}}
-@keyframes vqueue{0%,15%,100%{transform:translateX(0);opacity:1}40%,60%{transform:translateX(-10px);opacity:.3}}
-@keyframes vbar{0%,12%,100%{transform:scaleY(1)}38%,60%{transform:scaleY(.72)}78%{transform:scaleY(1.04)}}
-@keyframes vgrow{0%,12%{transform:scaleX(.05)}65%,100%{transform:scaleX(1)}}
-@media(prefers-reduced-motion:reduce){.visual-modal-overlay,.visual-stage *{animation:none!important}.vcell,.vnode,.vcircle{background:#ffe5c7!important}}
-@media(max-width:460px){.visual-stage{height:200px;padding:9px}.vcell{min-width:29px;height:34px;font-size:10px}.vnode{width:45px}.visual-steps{gap:5px}.visual-step{padding:7px;font-size:9px}}
+/* Nami concept lab: deliberate, learner-controlled walkthroughs */
+.subtopic-resource.visual{cursor:pointer;text-align:left;font:inherit;width:100%}
+.subtopic-resource.visual .subtopic-resource-copy b:after{content:" · INTERACTIVE WALKTHROUGH";font-size:8px;letter-spacing:.05em;color:#4b8a7d}
+.visual-modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(21,43,55,.62);backdrop-filter:blur(7px);display:grid;place-items:center;padding:12px}
+.visual-dialog{width:min(760px,100%);max-height:94vh;overflow:auto;background:#fffaf3;border:1px solid #f0dec8;border-radius:23px;box-shadow:0 28px 90px rgba(16,41,56,.32);padding:clamp(15px,3vw,25px)}
+.visual-dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.visual-kicker{font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:900;color:#bd7049}
+.visual-dialog h3{font:700 clamp(22px,4vw,29px)/1.15 'Playfair Display',Georgia,serif;color:#1c455b;margin:6px 0}
+.visual-sub{font-size:12px;color:#71818c;margin:0;line-height:1.55;max-width:620px}
+.visual-close{border:1px solid #eadfce;background:white;color:#547080;border-radius:12px;width:37px;height:37px;font-size:20px;flex:0 0 37px}
+.visual-progress{height:5px;background:#eee8dd;border-radius:99px;overflow:hidden;margin:16px 0 7px}
+.visual-progress span{height:100%;width:0;display:block;background:linear-gradient(90deg,#e98b63,#edb25e,#75b9a9);transition:width .18s}
+.visual-step-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#87949b;font-size:10px;font-weight:800}
+.visual-step-heading{font-size:14px;font-weight:900;color:#284a5b;margin:12px 0 4px}
+.visual-stage{min-height:210px;margin:10px 0 12px;position:relative;overflow:auto;border:1px solid #e4e9df;border-radius:17px;background:linear-gradient(145deg,#f3faf6,#fff7eb);padding:16px;color:#21465a;display:flex;align-items:center;justify-content:center}
+.visual-stage:before{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(57,125,125,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(57,125,125,.035) 1px,transparent 1px);background-size:25px 25px}
+.visual-stage>*{position:relative;z-index:1;width:100%}
+.visual-explanation{font-size:12px;line-height:1.7;color:#536b79;margin:0 0 12px}
+.visual-code-wrap{border:1px solid #e7e0d4;border-radius:13px;background:#fff;padding:10px 12px;margin-top:9px}
+.visual-code-label{font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:#9a8b7a;font-weight:900;margin-bottom:6px}
+.visual-code{font:11px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;color:#355565;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
+.visual-code .code-focus{color:#b85f42;font-weight:900;background:#fff0df;border-radius:4px;padding:1px 3px}
+.visual-callout{border-left:3px solid #e9a36c;background:#fff5e9;border-radius:0 10px 10px 0;padding:9px 11px;font-size:11px;line-height:1.6;color:#725d4e;margin-top:10px}
+.visual-controls{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-top:14px}
+.visual-control-group{display:flex;gap:8px}
+.visual-nav{border:1px solid #e5d9ca;border-radius:12px;background:white;color:#355569;padding:10px 14px;font-size:11px;font-weight:900;min-width:92px}
+.visual-nav.primary{background:#e98263;border-color:#e98263;color:white}
+.visual-nav:disabled{opacity:.35;cursor:not-allowed}
+.visual-nav:not(:disabled):hover{filter:brightness(.98);transform:translateY(-1px)}
+.visual-end-label{font-size:9px;color:#81908f;font-weight:800;text-align:right}
+.lesson-array{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:0 auto;width:100%}
+.lesson-array-item{min-width:42px;display:grid;justify-items:center;gap:4px}
+.lesson-cell{width:100%;min-height:43px;border:1px solid #d7e4db;background:#fff;border-radius:9px;display:grid;place-items:center;font-size:13px;font-weight:900;color:#34596a;padding:5px}
+.lesson-cell.active{background:#ffe6c9;border:2px solid #e19a67;color:#a85d42}
+.lesson-cell.complete{background:#e7f4ed;border-color:#9bc9b2;color:#347969}
+.lesson-index{font-size:8px;color:#96a29f}
+.lesson-pointer-row{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:10px;font-weight:900;color:#bd7049}
+.lesson-pointer-row span{background:#fff;border:1px solid #ebdfd2;border-radius:999px;padding:5px 9px}
+.lesson-board{width:100%;max-width:560px;margin:auto}
+.lesson-caption{text-align:center;color:#7e9094;font-size:10px;font-weight:800;margin-top:11px;line-height:1.5}
+.lesson-table{border-collapse:separate;border-spacing:4px;width:100%;font-size:10px;text-align:center}
+.lesson-table th{color:#71858b;font-size:9px;font-weight:900;padding:5px}
+.lesson-table td{background:#fff;border:1px solid #dce8de;border-radius:7px;padding:8px 5px;font-weight:800;color:#35586a}
+.lesson-table td.active{background:#ffe8ce;border-color:#e3a36e;color:#a65e45}
+.lesson-map{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.lesson-map-item{border:1px solid #dce7df;background:#fff;border-radius:10px;padding:8px 10px;min-width:85px;text-align:center}
+.lesson-map-item b{display:block;font-size:11px;color:#2d5264}
+.lesson-map-item small{display:block;font-size:9px;color:#7f918f;margin-top:3px}
+.lesson-arrows{text-align:center;color:#bd7049;font-weight:900;font-size:14px;margin:5px}
+.lesson-node-row{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap}
+.lesson-node{min-width:48px;padding:11px 8px;border:1px solid #bad7c9;border-radius:10px;background:#fff;text-align:center;font-size:11px;font-weight:900;position:relative}
+.lesson-node.active{background:#ffe8ce;border:2px solid #e19a67;color:#a65e45}
+.lesson-node.done{background:#e7f4ed;border-color:#9bc9b2}
+.lesson-node:not(:last-child):after{content:'→';color:#bd7049;position:absolute;left:calc(100% + 1px);top:50%;transform:translateY(-50%);z-index:2}
+.lesson-stack{display:flex;flex-direction:column-reverse;gap:5px;width:min(230px,80%);margin:auto;border-bottom:4px solid #83a99d;padding:7px}
+.lesson-stack-item{background:white;border:1px solid #d7e4db;border-radius:8px;padding:8px;text-align:center;font-weight:900;font-size:11px}
+.lesson-stack-item.top{background:#ffe6c9;border-color:#e19a67}
+.lesson-queue{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+.lesson-queue-item{min-width:47px;padding:11px 8px;background:#fff;border:1px solid #d7e4db;border-radius:8px;text-align:center;font-size:11px;font-weight:900}
+.lesson-queue-item.front{background:#e7f4ed;border-color:#8ebfac}
+.lesson-tree{display:grid;justify-items:center;gap:7px;max-width:460px;margin:auto}
+.lesson-tree-row{display:flex;justify-content:center;gap:clamp(12px,5vw,42px)}
+.lesson-tree-node{width:38px;height:35px;border-radius:50%;display:grid;place-items:center;border:2px solid #8db9a5;background:white;font-size:10px;font-weight:900}
+.lesson-tree-node.visited{background:#e6f3eb;border-color:#78ae99}
+.lesson-tree-node.current{background:#ffe5c7;border-color:#de9663}
+.lesson-graph{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;max-width:470px;margin:auto}
+.lesson-graph-node{border:1px solid #d4e4da;background:#fff;border-radius:10px;padding:8px 5px;text-align:center;font-size:10px;font-weight:900}
+.lesson-graph-node.visited{background:#e6f3eb;border-color:#8ebfac}
+.lesson-graph-node.current{background:#ffe5c7;border-color:#de9663}
+.lesson-graph-node.pending{color:#9ba9a4}
+.lesson-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;max-width:340px;margin:auto}
+.lesson-grid-cell{border:1px solid #d8e5dc;background:#fff;border-radius:8px;min-height:42px;display:grid;place-items:center;font-size:11px;font-weight:900}
+.lesson-grid-cell.active{background:#ffe5c7;border-color:#de9663}
+.lesson-grid-cell.visited{background:#e6f3eb;border-color:#8ebfac}
+.lesson-highlight{color:#a65e45;background:#fff0df;border-radius:5px;padding:1px 3px;font-weight:900}
+@media(max-width:480px){.visual-stage{min-height:185px;padding:10px}.visual-nav{min-width:0;padding:10px 11px}.lesson-cell{min-height:37px;font-size:11px}.lesson-array-item{min-width:34px}.visual-controls{align-items:stretch}.visual-control-group{flex:1}.visual-control-group .visual-nav{flex:1}.visual-end-label{max-width:85px}}
 
 </style>
 </head>
@@ -411,84 +426,282 @@ function resourcesForSubtopic(topic,dayNo,selected,detail){
   {label:'Read the guide',detail:article.title,icon:'▤',kind:'article',url:article.url},
   {label:'Try a problem',detail:problem.title,icon:'⚔',kind:'practice',url:problem.url}
  ];
- const motion={label:'See it in motion',detail:'A tiny animated demo · about 6 seconds',icon:'✧',kind:'visual'};
+ const motion={label:'See it in motion',detail:'Step through a real example, one operation at a time',icon:'✧',kind:'visual'};
  links.push(motion);
  return {hint:blurb,links,visual:visualForSubtopic(topic,dayNo)};
 }
 
-function visualForSubtopic(topic,dayNo){
- const t=topic.toLowerCase(),has=(...a)=>a.some(x=>t.includes(x));
- if(dayNo===12&&has('interval'))return {kind:'interval',title:'Merging intervals',tip:'After sorting by start, overlapping ranges can be merged into one continuous interval.',steps:['Sort by start','Detect overlap','Merge the range']};
- if(dayNo===21&&has('k-way merge'))return {kind:'heap',title:'K-way merge with a heap',tip:'Keep the smallest current item from each sorted list in a min-heap. Pop the next answer, then insert from that same list.',steps:['Add each list head','Pop the smallest','Push its next item']};
- if(dayNo===22&&has('cycle','dfs'))return {kind:'graph',title:'Graph traversal & cycles',tip:'Explore each neighbour once. A visited set and traversal state help detect revisits and cycles.',steps:['Visit a node','Track visited nodes','Detect a back edge']};
- if(dayNo===23&&has('bfs','shortest path','grid','visited'))return {kind:'graph',title:'Breadth-first search',tip:'BFS expands a frontier in layers. In an unweighted graph, the first visit gives the shortest distance.',steps:['Start the frontier','Visit the next layer','Record the distance']};
- if(dayNo===25)return {kind:'greedy',title:'Greedy choice',tip:'Choose a safe next move, update what is reachable, and repeat. The key is proving that the local choice stays safe.',steps:['Compare next moves','Take a safe choice','Update the frontier']};
- if((dayNo===26||dayNo===27)&&has('base cases'))return {kind:'dp',title:'DP base states',tip:'Base cases anchor the table. Each later state is built from smaller saved answers.',steps:['Set base values','Reuse stored states','Build next answers']};
- if(has('re-solve','missed question','identify patterns','mixed pattern','brute force','timed interview','clarify constraint','optimize'))return {kind:'flow',title:'Interview thinking',tip:'Move from a simple baseline to a better pattern, then explain why the change is correct.',steps:['Clarify the input','Improve the approach','Explain the trade-off']};
- if(has('tests','test cases','edge-case'))return {kind:'array',title:'Edge-case checks',tip:'A solution should survive tiny inputs, repeated values, boundaries and empty cases—not just the happy path.',steps:['Empty or tiny input','Duplicates and boundaries','Verify the result']};
- if(has('complexity','big-o','nested loop','best/worst','edge case'))return {kind:'complex',title:'How work grows',tip:'Compare how much work different algorithms do as the input gets larger.',steps:['One operation','One full pass','Nested passes']};
- if(has('prefix','range quer','running total','subarray sum'))return {kind:'prefix',title:'Prefix sums',tip:'Store cumulative totals once. A range sum is the difference between two prefix positions.',steps:['Read values','Accumulate totals','Subtract boundaries']};
- if(has('sliding','window','rolling sum','minimum valid','expand/shrink'))return {kind:'window',title:'Sliding window',tip:'The highlighted range moves across contiguous values. Expand or shrink an edge to keep the window valid.',steps:['Start a window','Move the right edge','Shrink the left edge']};
- if(has('two pointer','opposite-direction','same-direction','sorted pair','remove duplicates','3sum'))return {kind:'pointers',title:'Two pointers',tip:'Two indices move according to a rule, ruling out candidates without checking every pair.',steps:['Start at both ends','Check the pair','Move one pointer']};
- if(has('fast/slow','fast & slow','floyd','cycle entry','find middle'))return {kind:'fastslow',title:'Fast & slow pointers',tip:'The slow pointer moves one step; fast moves two. In a cycle they eventually meet.',steps:['Slow moves +1','Fast moves +2','Detect a meeting']};
- if(has('interval'))return {kind:'interval',title:'Merging intervals',tip:'After sorting by start, overlapping ranges can be merged into one continuous interval.',steps:['Sort by start','Detect overlap','Merge the range']};
- if(has('k-way merge'))return {kind:'heap',title:'K-way merge with a heap',tip:'A min-heap keeps the smallest current item from each sorted list at the top.',steps:['Add list heads','Pop the smallest','Push the next item']};
- if(has('linked list','node/pointer','dummy node','reverse','cycle','merge','nth','reorder','middle','head/tail'))return {kind:'linked',title:'Linked list pointers',tip:'Each node points to the next node. Reversing a list means changing those links safely.',steps:['Read next','Save the link','Redirect the pointer']};
- if(has('queue','deque','fifo','multi-source','queue using stacks'))return {kind:'queue',title:'Queue · first in, first out',tip:'New values join at the rear. The oldest value leaves from the front.',steps:['Enqueue at rear','Wait in line','Dequeue from front']};
- if(has('stack','bracket','monotonic','greater element','min stack','postfix','lifo'))return {kind:'stack',title:'Stack · last in, first out',tip:'Push adds to the top. Pop removes the most recently added item.',steps:['Push an item','Top changes','Pop the latest']};
- if(has('heap','priority queue','top-k','k-way','median','scheduling'))return {kind:'heap',title:'Heap · priority at the root',tip:'The heap property keeps the smallest or largest value at the root after updates.',steps:['Insert a value','Restore heap order','Remove the root']};
- if(has('binary search','lower/upper','rotated array','search on answer'))return {kind:'binary',title:'Binary search',tip:'Check the middle, then discard the half that cannot contain the answer. The range halves each round.',steps:['Set low and high','Check the middle','Keep one half']};
- if(has('sort','sweep-line'))return {kind:'sorting',title:'Sorting in action',tip:'Compare values and move out-of-order items. Repeated passes bring the collection into order.',steps:['Compare values','Swap the pair','Repeat the pass']};
- if(has('interval'))return {kind:'interval',title:'Merging intervals',tip:'After sorting by start, overlapping ranges can be merged into one continuous interval.',steps:['Sort by start','Detect overlap','Merge the range']};
- if(has('pre/in/postorder','tree dfs','binary tree','tree traversal'))return {kind:'tree',title:'Tree traversal',tip:'Start from the root and explore child nodes. DFS goes deep; BFS visits a level at a time.',steps:['Visit the root','Explore children','Continue by level']};
- if(has('graph','adjacency','visited set','connected component','grid dfs','cycle detection','topological','dag','kahn','indegree','union-find','path compression','level bfs','unweighted shortest path','grids','visited timing','dfs'))return {kind:'graph',title:'Graph traversal',tip:'Visit a node, mark it, then explore its neighbours. The visited set prevents repeat work.',steps:['Start at a node','Visit a neighbour','Mark it visited']};
- if(has('tree','pre/in/postorder','recursive return','height','diameter','path sum','level-order','bst properties','validate bst','lca','serialize','right-side','kth smallest','balance'))return {kind:'tree',title:'Tree traversal',tip:'Start from the root and explore child nodes. DFS goes deep; BFS visits a level at a time.',steps:['Visit the root','Explore children','Continue by level']};
- if(has('recursion','backtracking','base case','call stack','subsets','combinations','permutations','pruning','choose/explore','undo'))return {kind:'recursion',title:'Recursion & backtracking',tip:'Choose a path, explore it, then undo the choice to try another branch. A base case stops each branch.',steps:['Choose','Explore deeper','Undo and retry']};
- if(has('dynamic programming','memoization','tabulation','1d dp','2d/grid dp','state/transition','state design','knapsack','lcs','coin change','choose/skip'))return {kind:'dp',title:'Dynamic programming',tip:'Solve a smaller state once, store its answer, then reuse it to build larger answers.',steps:['Start with base cases','Reuse stored state','Build next state']};
- if(has('greedy','jump game','decisive property','interval scheduling'))return {kind:'greedy',title:'Greedy choice',tip:'Choose a safe next move, update what is reachable, and repeat.',steps:['Compare next moves','Take a safe choice','Update the frontier']};
- if(has('dict','hash','frequency','deduplication','counter','defaultdict','hash lookup'))return {kind:'hash',title:'Hash map lookup',tip:'A key maps to a bucket, so lookup jumps to the stored value instead of scanning everything.',steps:['Take a key','Find its bucket','Read or update']};
- if(has('string','palindrome','character','substring','subsequence'))return {kind:'string',title:'String scan',tip:'A string is a sequence of characters. Move through positions to compare, count, or build a result.',steps:['Read a character','Compare or count','Move the index']};
- if(has('array','lists/tuples','list/tuple','traversal','in-place','matrix','matri','kadane','python syntax'))return {kind:'array',title:'Array traversal',tip:'Items sit at indexed positions. A scan visits each position; an in-place update changes the stored value.',steps:['Start at index 0','Visit each item','Update in place']};
- return {kind:'flow',title:'Problem-solving flow',tip:'Turn a question into a sequence: understand the input, choose a pattern, test an edge case, and explain the cost.',steps:['Understand input','Choose a pattern','Test and explain']};
+
+function lessonEscape(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function lessonArray(values,active=[],complete=[],pointers=[],caption=''){
+ const html=values.map((v,i)=>'<div class="lesson-array-item"><div class="lesson-cell '+(active.includes(i)?'active':complete.includes(i)?'complete':'')+'">'+lessonEscape(v)+'</div><span class="lesson-index">'+i+'</span></div>').join('');
+ return '<div class="lesson-board"><div class="lesson-array">'+html+'</div>'+(pointers.length?'<div class="lesson-pointer-row">'+pointers.map(x=>'<span>'+lessonEscape(x)+'</span>').join('')+'</div>':'')+(caption?'<div class="lesson-caption">'+caption+'</div>':'')+'</div>';
 }
-function visualSceneMarkup(kind){
- const cells=(a)=>'<div class="vrow">'+a.map((v,i)=>'<span class="vcell" style="--i:'+i+'">'+v+'</span>').join('')+'</div>';
- switch(kind){
- case 'array':return '<div class="vwrap">'+cells([4,8,2,7,5,1])+'<div class="vlabels"><span>↑ scan index →</span><span>O(n)</span></div></div>';
- case 'string':return '<div class="vwrap">'+cells(['C','O','D','E','!'])+'<div class="vlabels"><span>compare characters</span><span>index →</span></div></div>';
- case 'hash':return '<div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;width:100%;max-width:390px"><div class="vcomplex" style="gap:7px"><b class="vcell">key: "kiwi"</b><div style="text-align:center;color:#ba714b">↓ hash(key) ↓</div><b class="vcell">bucket: 2</b></div><div class="vcomplex" style="gap:4px">'+['0   —','1   —','2   "kiwi" → 4','3   —'].map(x=>'<div class="vcell" style="height:29px;min-width:0">'+x+'</div>').join('')+'</div></div>';
- case 'prefix':return '<div style="width:100%;max-width:400px"><div class="visual-caption">values</div>'+cells([2,1,3,4,2])+'<div class="visual-caption">running totals</div>'+cells([2,3,6,10,12])+'</div>';
- case 'window':return '<div class="vwrap" style="position:relative"><div class="vwindow"></div>'+cells([4,2,7,1,5,3])+'<div class="vlabels"><span>left edge ↔</span><span>right edge →</span></div></div>';
- case 'pointers':return '<div class="vwrap">'+cells([1,3,4,6,8,10])+'<div class="vlabels"><span>LEFT ↗</span><span>↖ RIGHT</span></div><div class="visual-caption">move one pointer; shrink the search space</div></div>';
- case 'fastslow':return '<div><div class="vnodes">'+['A','B','C','D','E'].map((x,i)=>'<span class="vnode" style="--i:'+i+'">'+x+'</span>').join('')+'</div><div class="vlabels"><span>slow: +1</span><span>fast: +2</span></div></div>';
- case 'linked':return '<div><div class="vnodes">'+[12,7,19,4].map((x,i)=>'<span class="vnode" style="--i:'+i+'">'+x+'</span>').join('')+'</div><div class="vlabels"><span>HEAD</span><span>next → null</span></div></div>';
- case 'stack':return '<div><b style="position:absolute;left:calc(50% + 75px);top:25px;color:#bd7049;font-size:10px">TOP ↑</b><div class="vstack">'+[10,20,30,40].map(x=>'<span>'+x+'</span>').join('')+'</div><div class="visual-caption">push ↕ pop</div></div>';
- case 'queue':return '<div><div class="vqueue">'+[12,18,23,31].map(x=>'<span>'+x+'</span>').join('')+'</div><div class="vlabels"><span>FRONT · dequeue</span><span>enqueue · REAR</span></div></div>';
- case 'binary':return '<div>'+cells([2,5,8,12,16,21,29])+'<div class="vlabels"><span>low ↑</span><span>middle = 12</span><span>↑ high</span></div></div>';
- case 'sorting':return '<div><div class="vbars">'+[48,82,34,110,67,94,25].map((h,i)=>'<span class="vbar" style="--h:'+h+'px;--i:'+i+'"></span>').join('')+'</div><div class="visual-caption">compare · swap · repeat</div></div>';
- case 'interval':return '<div style="width:90%;height:100px;position:relative"><span style="position:absolute;left:5%;top:30px;width:29%;height:26px;background:#e99b67;border-radius:7px;color:white;text-align:center;font-size:10px">[1, 4]</span><span style="position:absolute;left:23%;top:30px;width:32%;height:26px;background:#70a99b;border-radius:7px;color:white;text-align:center;font-size:10px">[3, 6]</span><span style="position:absolute;left:63%;top:30px;width:25%;height:26px;background:#d6b16f;border-radius:7px;color:white;text-align:center;font-size:10px">[8, 9]</span><div class="visual-caption" style="position:absolute;top:72px;width:100%">overlap → merged [1, 6]</div></div>';
- case 'tree':case 'heap':return '<div><div class="vtree"><div class="vlevel"><span class="vcircle">8</span></div><div class="vlevel"><span class="vcircle" style="--d:.8s">3</span><span class="vcircle" style="--d:1.5s">12</span></div><div class="vlevel">'+['1','6','10','14'].map((x,i)=>'<span class="vcircle" style="--d:'+(2+i*.5)+'s">'+(kind==='heap'?['2','5','7','9'][i]:x)+'</span>').join('')+'</div></div><div class="visual-caption">'+(kind==='heap'?'min value stays at the root':'root → children → leaves')+'</div></div>';
- case 'graph':return '<div><div class="vgraph"><svg viewBox="0 0 270 160"><line x1="16" y1="80" x2="88" y2="30"/><line x1="16" y1="80" x2="88" y2="130"/><line x1="88" y1="30" x2="168" y2="30"/><line x1="88" y1="30" x2="168" y2="130"/><line x1="88" y1="130" x2="168" y2="130"/><line x1="168" y1="30" x2="250" y2="80"/><line x1="168" y1="130" x2="250" y2="80"/></svg>'+[['A',5,63],['B',78,13],['C',78,113],['D',158,13],['E',158,113],['F',239,63]].map(([x,l,t],i)=>'<b style="left:'+l+'px;top:'+t+'px;--d:'+i*.6+'s">'+x+'</b>').join('')+'</div><div class="visual-caption">visit → mark → explore neighbours</div></div>';
- case 'dp':return '<div><div class="vdp">'+[1,1,2,3,1,2,3,5,2,3,5,8].map((x,i)=>'<span style="--i:'+i+'">'+x+'</span>').join('')+'</div><div class="visual-caption">reuse saved states to build the next answer</div></div>';
- case 'complex':return '<div class="vcomplex">'+[['O(1)','8%'],['O(log n)','27%'],['O(n)','58%'],['O(n²)','94%']].map(([x,w],i)=>'<div><b>'+x+'</b><i><em style="--w:'+w+';animation-delay:'+i*.3+'s"></em></i></div>').join('')+'</div>';
- case 'recursion':case 'greedy':case 'flow':default:return '<div><div class="vrow">'+['Input','Pattern','Choice','Result'].map((x,i)=>'<span class="vcell" style="--i:'+i+';padding:5px">'+x+'</span>').join('')+'</div><div class="visual-caption">'+(kind==='recursion'?'choose · explore · undo':kind==='greedy'?'choose a safe local move':'understand · solve · verify')+'</div></div>';
+function lessonMap(entries,caption=''){
+ return '<div class="lesson-board"><div class="lesson-map">'+entries.map(([k,v,kind])=>'<div class="lesson-map-item"><b>'+lessonEscape(k)+'</b><small>'+lessonEscape(v)+(kind?' · '+lessonEscape(kind):'')+'</small></div>').join('')+'</div>'+(caption?'<div class="lesson-caption">'+caption+'</div>':'')+'</div>';
+}
+function lessonTable(headers,rows,activeRow=-1){
+ return '<div class="lesson-board"><table class="lesson-table"><thead><tr>'+headers.map(x=>'<th>'+lessonEscape(x)+'</th>').join('')+'</tr></thead><tbody>'+rows.map((row,i)=>'<tr>'+row.map(x=>'<td class="'+(i===activeRow?'active':'')+'">'+lessonEscape(x)+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
+}
+function lessonStep(label,explanation,diagram,code,insight=''){
+ return {label,explanation,diagram,code,insight};
+}
+function buildVisualLesson(topic,dayNo){
+ const t=topic.toLowerCase(),has=(...words)=>words.some(w=>t.includes(w));
+ const lesson=(title,intro,code,steps)=>({title,intro,code,steps});
+ const step=lessonStep;
+ if(dayNo===2||has('time/space complexity','big-o','nested loops','best/worst case','verbal complexity','explain complexity')){
+  const rows=[['n','O(1)','O(n)','O(n²)'],['4','1','4','16'],['8','1','8','64'],['16','1','16','256']];
+  return lesson('Big-O: how work grows','Big-O describes how the number of operations grows as the input size grows. Compare these three example functions.', 'for x in items:       # O(n)\n    print(x)\n\nfor x in items:       # O(n²)\n    for y in items:\n        print(x, y)',[
+   step('Constant work','The function reads one value and returns. Doubling the input does not add more work.',lessonTable(['Input n','O(1)','O(n)','O(n²)'],rows.slice(1),0),'return items[0]','One operation stays one operation.'),
+   step('One loop','A single pass touches each item exactly once. For 8 items, it performs about 8 iterations.',lessonTable(['Input n','O(1)','O(n)','O(n²)'],rows.slice(1),1),'for item in items:\n    use(item)','Work grows in proportion to n.'),
+   step('Nested loops','For every item, the inner loop visits every item again. With 8 values, that is 8 × 8 = 64 pairs.',lessonTable(['Input n','O(1)','O(n)','O(n²)'],rows.slice(1),2),'for x in items:\n    for y in items:\n        use(x, y)','Nested full scans multiply the work.'),
+   step('Compare the growth','At n = 16, the three examples take 1, 16 and 256 operations. Big-O focuses on this growth trend, not machine speed.',lessonTable(['Input n','O(1)','O(n)','O(n²)'],rows.slice(1),2),'# Ignore constants and lower-order terms\n# Keep the dominant growth rate','This is why an O(n) approach can beat O(n²) on large inputs.')
+  ]);
  }
+ if(dayNo===5||has('dict/set','dict/set operations','hash lookup','frequency','counter','defaultdict','deduplication')){
+  const twoSum=has('two sum')||dayNo===5;
+  return lesson('Hash map: solve Two Sum','Use a dictionary to remember values already seen. For each number, look up the complement needed to reach the target.', 'nums = [2, 7, 11, 15]\ntarget = 9\nseen = {}\nfor i, x in enumerate(nums):\n    need = target - x\n    if need in seen:\n        return [seen[need], i]\n    seen[x] = i',[
+   step('Start with an empty map','The dictionary is empty because we have not processed any numbers yet. The target is 9.',lessonMap([['seen','{}'],['target','9'],['index','0']]),'seen = {}','The map stores number → index.'),
+   step('Read the first number','The current value is 2. To make 9, we need 7. It is not in the map, so remember 2 at index 0.',lessonMap([['need','7'],['seen','{2: 0}'],['action','store 2']]),'need = 9 - 2  # 7\nseen[2] = 0','Store only after checking the complement.'),
+   step('Read the next number','The current value is 7. Its complement is 2, and 2 is already in the map at index 0.',lessonMap([['need','2'],['seen','{2: 0}'],['match','found at index 0']]),'need = 9 - 7  # 2\nif need in seen:','A hash lookup finds the complement without scanning the earlier array.'),
+   step('Return the pair','The matching indices are 0 and 1. Each element was visited once, giving O(n) expected time and O(n) extra space.',lessonArray([2,7,11,15],[0,1],[],['match: indices 0 and 1']),'return [seen[2], 1]','This pattern is useful whenever you need fast membership or frequency lookups.')
+  ]);
+ }
+ if(dayNo===6||has('prefix','range quer','running total','subarray sum')){
+  return lesson('Prefix sums: answer a range query','A prefix array stores the sum up to each position. Subtract two prefix values to get any contiguous range sum.', 'nums = [2, 4, 1, 3]\nprefix = [0]\nfor x in nums:\n    prefix.append(prefix[-1] + x)\n\n# sum from index 1 through 3\nanswer = prefix[4] - prefix[1]',[
+   step('Read the original array','We want the sum from index 1 through index 3. Adding the range directly works, but repeated queries would repeat work.',lessonArray([2,4,1,3],[],[],['indices: 0 1 2 3']),'nums = [2, 4, 1, 3]','The requested range is [4, 1, 3].'),
+   step('Build cumulative totals','Start with 0. Add each value to the previous total: 2, then 6, then 7, then 10.',lessonTable(['Boundary','0','1','2','3','4'],[['Prefix','0','2','6','7','10']]),'prefix = [0]\nfor x in nums:\n    prefix.append(prefix[-1] + x)','prefix[k] is the sum of the first k values.'),
+   step('Choose the two boundaries','The range [1..3] ends just before prefix boundary 4 and starts before boundary 1.',lessonTable(['Boundary','0','1','2','3','4'],[['Prefix','0','2','6','7','10']]),'left = 1\nright = 3','Use right + 1 because the right index is inclusive.'),
+   step('Subtract the prefixes','prefix[4] is 10 and prefix[1] is 2. Their difference is 8, which equals 4 + 1 + 3.',lessonMap([['prefix[4]','10'],['prefix[1]','− 2'],['range sum','= 8']]),'answer = prefix[right + 1] - prefix[left]','After O(n) preprocessing, each range query takes O(1).')
+  ]);
+ }
+ if(dayNo===8||has('two pointer','opposite-direction','same-direction','sorted pairs','remove duplicates','3sum')){
+  return lesson('Two pointers: find a pair in a sorted array','Because the array is sorted, the sum tells us which pointer to move. This avoids checking every possible pair.', 'nums = [1, 2, 4, 6, 8]\ntarget = 10\nleft, right = 0, len(nums) - 1\nwhile left < right:\n    total = nums[left] + nums[right]\n    if total == target: break\n    if total < target: left += 1\n    else: right -= 1',[
+   step('Point from both ends','The smallest and largest values are 1 and 8. Their sum is 9, below the target 10.',lessonArray([1,2,4,6,8],[0,4],[],['left = 0','right = 4','sum = 9']),'left = 0\nright = len(nums) - 1','All values between the pointers are still candidates.'),
+   step('Move the left pointer','The sum 9 is too small. Moving right would only make the sum smaller, so move left to the next larger value.',lessonArray([1,2,4,6,8],[1,4],[],['left → 1','right = 4','sum = 10']),'if total < target:\n    left += 1','Sorted order makes this move safe.'),
+   step('Check the new pair','The values 2 and 8 add to 10. The target is found, so return their indices.',lessonArray([1,2,4,6,8],[1,4],[],['2 + 8 = 10 ✓']),'if total == target:\n    return [left, right]','The algorithm skipped impossible pairs rather than testing them all.'),
+   step('Understand the efficiency','Each pointer only moves inward. Across the whole scan, there are at most n − 1 moves: O(n) time and O(1) extra space.',lessonMap([['Nested pair scan','O(n²)'],['Two pointers','O(n)'],['Extra space','O(1)']]),'while left < right:\n    ...','This relies on sorted input; sorting first may change the total complexity.')
+  ]);
+ }
+ if(dayNo===9||has('fast/slow','fast & slow','floyd','cycle entry','find middle')){
+  const frames=[
+   step('Start together','Both pointers begin at the head. The fast pointer will move twice as far on each iteration.',lessonMap([['slow','node 1'],['fast','node 1'],['next links','1 → 2 → 3 → 4 → 2']]),'slow = head\nfast = head','Fast and slow are references, not copied nodes.'),
+   step('Move one and two steps','Slow moves from 1 to 2. Fast moves from 1 to 3 by following next twice.',lessonMap([['slow','node 2'],['fast','node 3'],['moves','1 step / 2 steps']]),'slow = slow.next\nfast = fast.next.next','Fast covers more distance each iteration.'),
+   step('Move again','Slow reaches node 3. Fast follows 3 → 4 → 2 and reaches node 2.',lessonMap([['slow','node 3'],['fast','node 2'],['cycle','still inside the loop']]),'while fast and fast.next:\n    slow = slow.next\n    fast = fast.next.next','The two pointers move around the same cycle at different speeds.'),
+   step('They meet','Slow moves to node 4; fast moves 2 → 3 → 4. Meeting proves a cycle exists.',lessonMap([['slow','node 4 ✓'],['fast','node 4 ✓'],['result','cycle detected']]),'if slow is fast:\n    return True','The O(1)-space method detects a cycle without a visited set.')
+  ];
+  return lesson('Fast & slow pointers: detect a cycle','Floyd’s algorithm uses two references moving at different speeds. In a cyclic list, the faster pointer eventually catches the slower one.', 'slow = head\nfast = head\nwhile fast and fast.next:\n    slow = slow.next\n    fast = fast.next.next\n    if slow is fast:\n        return True\nreturn False',frames);
+ }
+ if(dayNo===10||dayNo===11||has('sliding','window','rolling sum','expand/shrink','minimum valid')){
+  const variable=dayNo===11||has('variable','minimum valid','expand/shrink');
+  if(variable)return lesson('Variable sliding window: longest unique substring','Grow the right edge. When a repeated character enters the window, move the left edge until the window is valid again.', 's = "abca"\nleft = 0\nlast_seen = {}\nfor right, ch in enumerate(s):\n    if ch in last_seen:\n        left = max(left, last_seen[ch] + 1)\n    last_seen[ch] = right',[
+   step('Begin with an empty window','The left and right boundaries both start at 0. The current window contains no characters.',lessonArray(['a','b','c','a'],[],[],['left = 0','right = 0']),'left = 0\nlast_seen = {}','A window is always a contiguous section of the string.'),
+   step('Expand to abc','Read a, then b, then c. Each character is new, so the window becomes abc and its length is 3.',lessonArray(['a','b','c','a'],[0,1,2],[],['window = abc','length = 3']),'last_seen[ch] = right','The current best valid window has length 3.'),
+   step('A duplicate arrives','The next character is a, already seen at index 0. Move left to index 1 so the window no longer contains two a characters.',lessonArray(['a','b','c','a'],[1,2,3],[],['duplicate a','left moves to 1']),'left = max(left, last_seen[ch] + 1)','Move left only as far as needed; never move it backwards.'),
+   step('Update the answer','The new window is bca, still length 3. Update the last-seen position for a and keep the maximum.',lessonArray(['a','b','c','a'],[1,2,3],[],['window = bca','best = 3']),'last_seen[ch] = right\nbest = max(best, right-left+1)','Each character is processed at most a constant number of times: O(n).')
+  ]);
+  return lesson('Fixed sliding window: maximum sum of 3','A fixed-size window reuses the previous sum. Remove the value leaving the left edge and add the new value at the right edge.', 'nums = [2, 1, 5, 1, 3, 2]\nk = 3\nwindow_sum = sum(nums[:k])\nbest = window_sum\nfor right in range(k, len(nums)):\n    window_sum += nums[right] - nums[right-k]\n    best = max(best, window_sum)',[
+   step('Calculate the first window','The first three values are 2, 1 and 5. Their sum is 8, the current best.',lessonArray([2,1,5,1,3,2],[0,1,2],[],['window = [2, 1, 5]','sum = 8']),'window_sum = sum(nums[:3])','The window width stays exactly 3.'),
+   step('Slide one position','Remove the outgoing 2 and add the incoming 1. The new window is [1, 5, 1], with sum 7.',lessonArray([2,1,5,1,3,2],[1,2,3],[],['− 2 + 1','new sum = 7']),'window_sum += nums[right] - nums[right-k]','Do not recalculate all three elements.'),
+   step('Slide again','Remove 1 and add 3. The window [5, 1, 3] totals 9, improving the best sum.',lessonArray([2,1,5,1,3,2],[2,3,4],[],['− 1 + 3','new sum = 9 ✓']),'best = max(best, window_sum)','The best window so far is [5, 1, 3].'),
+   step('Finish the last window','Remove 5 and add 2. The final window totals 6, so the maximum remains 9.',lessonArray([2,1,5,1,3,2],[3,4,5],[],['− 5 + 2','new sum = 6','best = 9']),'return best','The scan is O(n), instead of O(n × k) recomputation.')
+  ]);
+ }
+ if(dayNo===15||has('linked list','node/pointer','dummy node','iterative/recursive reverse','remove nth','reorder')){
+  return lesson('Linked list: reverse the pointers','A linked list is made of nodes that point to the next node. Save the next node before redirecting a link, or the rest of the list is lost.', 'prev = None\ncurr = head\nwhile curr:\n    nxt = curr.next\n    curr.next = prev\n    prev = curr\n    curr = nxt\nhead = prev',[
+   step('Start at the head','prev is None and curr is node 1. The original list is 1 → 2 → 3 → None.',lessonMap([['prev','None'],['curr','1'],['next','2']]),'prev = None\ncurr = head','The next pointer of node 1 still leads to node 2.'),
+   step('Save the next node','Before changing node 1, save its next reference. This prevents losing access to nodes 2 and 3.',lessonMap([['prev','None'],['curr','1'],['nxt','2 (saved)']]),'nxt = curr.next','Always save next before reversing the link.'),
+   step('Reverse one link','Point node 1 back to prev (None). Then advance prev to 1 and curr to the saved node 2.',lessonMap([['links','1 → None'],['prev','1'],['curr','2']]),'curr.next = prev\nprev = curr\ncurr = nxt','One pointer has been reversed; the remaining suffix is untouched.'),
+   step('Repeat for every node','After repeating the same operation for nodes 2 and 3, prev points to 3 → 2 → 1 → None.',lessonMap([['reversed','3 → 2 → 1 → None'],['prev','3'],['curr','None']]),'head = prev','The new head is the final prev reference. Time O(n), extra space O(1).')
+  ]);
+ }
+ if(dayNo===16||has('stack','bracket','monotonic','greater element','min stack','postfix','lifo')){
+  return lesson('Stack: validate matching brackets','A stack is last-in, first-out. Push opening brackets; when a closing bracket appears, it must match the most recent opening bracket.', 'pairs = {")": "(", "]": "[", "}": "{"}\nstack = []\nfor ch in "([])":\n    if ch in "([{":\n        stack.append(ch)\n    elif not stack or stack.pop() != pairs[ch]:\n        return False\nreturn not stack',[
+   step('Read the first opening bracket','The character is (. Push it onto the stack. It becomes the top item.',lessonArray(['(','[',']',')'],[0],[],['stack = [ ( ]','top = (']),'stack = []\nstack.append(ch)','Opening brackets are saved until their matching closer arrives.'),
+   step('Read the next opening bracket','The character is [. Push it above (. The top is now [, because it was opened most recently.',lessonMap([['bottom','('],['top','['],['stack','(  [']]),'stack.append(ch)','The most recently opened bracket must close first.'),
+   step('Match the closing bracket',']'+' is the closer for [. Pop the top item and verify it equals [.',lessonMap([['before','(  ['],['read',']'],['after pop','('],['status','matched ✓']]),'if stack.pop() != pairs[ch]:\n    return False','The inner bracket closes before the outer bracket.'),
+   step('Close the outer bracket','The final ) matches the remaining (. The stack is empty, so every bracket was closed correctly.',lessonMap([['read',')'],['stack','[]'],['result','valid ✓']]),'return not stack','A valid sequence must finish with an empty stack.')
+  ]);
+ }
+ if(dayNo===17||has('queue','deque','fifo','multi-source','queue using stacks','level bfs')){
+  return lesson('Queue: breadth-first processing','A queue is first-in, first-out. BFS uses it to process a graph in layers: enqueue neighbours, then process the oldest waiting node.', 'from collections import deque\nqueue = deque(["A"])\nvisited = {"A"}\nwhile queue:\n    node = queue.popleft()\n    for neighbour in graph[node]:\n        if neighbour not in visited:\n            visited.add(neighbour)\n            queue.append(neighbour)',[
+   step('Enqueue the start node','The queue contains A. A is marked visited when it is added, which prevents duplicate enqueues.',lessonMap([['queue front','A'],['visited','{A}'],['action','start BFS']]),'queue = deque(["A"])\nvisited = {"A"}','The front of the queue is the next item to process.'),
+   step('Remove A and add its neighbours','Dequeue A. Its neighbours B and C are not visited, so add both to the rear.',lessonMap([['dequeued','A'],['queue','B, C'],['visited','A, B, C']]),'node = queue.popleft()\nqueue.extend(["B", "C"])','All nodes one edge from A are now waiting in the queue.'),
+   step('Process B before C','B is older in the queue, so it comes out first. Add D behind C.',lessonMap([['dequeued','B'],['queue','C, D'],['visited','A, B, C, D']]),'node = queue.popleft()\nqueue.append("D")','This order is what makes BFS visit by distance layers.'),
+   step('Continue until the queue is empty','C is processed next, then D. The traversal order is A, B, C, D, E if C also discovers E.',lessonMap([['order','A → B → C → D → E'],['queue','empty'],['result','complete']]),'while queue:\n    node = queue.popleft()','BFS finds shortest paths in unweighted graphs because it expands one edge layer at a time.')
+  ]);
+ }
+ if(dayNo===13||has('binary search','lower/upper','rotated array','search on answer')){
+  return lesson('Binary search: find 9 in a sorted array','Binary search maintains a search interval. Each comparison discards half of the remaining values, but it requires sorted data.', 'nums = [1, 3, 5, 7, 9, 11, 13]\ntarget = 9\nlow, high = 0, len(nums)-1\nwhile low <= high:\n    mid = (low + high) // 2\n    if nums[mid] == target: return mid\n    if nums[mid] < target: low = mid + 1\n    else: high = mid - 1',[
+   step('Start with the whole range','low is index 0 and high is index 6. The middle index is 3, whose value is 7.',lessonArray([1,3,5,7,9,11,13],[3],[],['low = 0','mid = 3','high = 6']),'mid = (low + high) // 2','We compare the target 9 with the middle value 7.'),
+   step('Discard the left half','7 is smaller than 9. The target can only be to the right, so set low to mid + 1 = 4.',lessonArray([1,3,5,7,9,11,13],[4,5,6],[],['discard indices 0–3','low = 4','high = 6']),'if nums[mid] < target:\n    low = mid + 1','Every discarded value is known to be too small.'),
+   step('Check the new middle','The new middle is index 5 with value 11. It is too large, so high becomes 4.',lessonArray([1,3,5,7,9,11,13],[4],[],['mid = 5 → value 11','high = 4']),'else:\n    high = mid - 1','Only the values in the remaining range are still possible.'),
+   step('Find the target','low and high are both 4. The middle value is 9, so return index 4.',lessonArray([1,3,5,7,9,11,13],[4],[],['mid = 4','value = 9 ✓','return index 4']),'return mid','The search takes O(log n) comparisons.')
+  ]);
+ }
+ if(dayNo===12||has('interval','merge intervals')){
+  return lesson('Merge intervals: combine overlaps','Sort intervals by their start. If the next interval begins before the current one ends, extend the current interval; otherwise, save it and start another.', 'intervals = [[1,3], [2,6], [8,10], [9,12]]\nmerged = []\nfor start, end in intervals:\n    if not merged or start > merged[-1][1]:\n        merged.append([start, end])\n    else:\n        merged[-1][1] = max(merged[-1][1], end)',[
+   step('Start with the first interval','The first interval [1,3] becomes the current merged interval.',lessonMap([['input','[1,3]'],['merged','[1,3]']]),'merged = [[1, 3]]','We process intervals in sorted order.'),
+   step('Detect an overlap','The next interval [2,6] starts at 2, before the current end 3. They overlap, so extend the end to 6.',lessonMap([['current','[1,3]'],['next','[2,6]'],['merged','[1,6]']]),'merged[-1][1] = max(3, 6)','The combined range covers every point from 1 through 6.'),
+   step('Start a separate interval','[8,10] starts after 6, so it does not overlap. Append it as a new range.',lessonMap([['current','[1,6]'],['next','[8,10]'],['merged','[1,6], [8,10]']]),'merged.append([8, 10])','A gap means we must keep two intervals.'),
+   step('Merge the final overlap','[9,12] overlaps [8,10], so extend that interval to [8,12].',lessonMap([['current','[8,10]'],['next','[9,12]'],['result','[1,6], [8,12]']]),'merged[-1][1] = max(10, 12)','After sorting, one scan is enough: O(n log n) including sorting.')
+  ]);
+ }
+ if(dayNo===18||has('recursion','backtracking','base case','call stack','subsets','combinations','permutations','pruning','choose/explore','undo')){
+  return lesson('Backtracking: generate all subsets','At each position, make two choices: include the value or skip it. When all values are considered, record the current subset.', 'def subsets(nums):\n    result, path = [], []\n    def dfs(i):\n        if i == len(nums):\n            result.append(path.copy())\n            return\n        path.append(nums[i])\n        dfs(i + 1)\n        path.pop()\n        dfs(i + 1)\n    dfs(0)\n    return result',[
+   step('Start with an empty path','For nums = [1,2], the path is initially empty and the next decision is about value 1.',lessonMap([['index i','0'],['path','[]'],['result','[]']]),'path = []\ndfs(0)','The path represents the choices made so far.'),
+   step('Choose to include 1','Append 1 and recurse to the next index. The current path is [1].',lessonMap([['choice','include 1'],['path','[1]'],['next index','1']]),'path.append(nums[i])\ndfs(i + 1)','The recursive call explores everything that follows this choice.'),
+   step('Include 2, then reach the base case','Append 2. At index 2, every value has been considered, so record a copy of [1,2].',lessonMap([['path','[1,2]'],['base case','i == len(nums)'],['result','[[1,2]]']]),'if i == len(nums):\n    result.append(path.copy())','Copy the path; do not store a reference that will later change.'),
+   step('Undo and explore the other branch','Pop 2, then pop 1. The path returns to []; the skip branches produce [1], [2] and [].',lessonMap([['undo','pop 2, pop 1'],['path','[]'],['all subsets','[1,2], [1], [2], []']]),'path.pop()\ndfs(i + 1)','Backtracking restores the state before exploring another choice.')
+  ]);
+ }
+ if(dayNo===19||dayNo===20||has('pre/in/postorder','tree dfs','binary tree','tree traversal','level-order','bst properties','validate bst','lca','serialize','height/diameter','path sum','balance')){
+  const bfs=dayNo===20||has('level-order','level bfs','bst');
+  if(bfs)return lesson('Tree BFS: level-order traversal','A queue stores the nodes waiting to be visited. Process the current queue size as one level, then enqueue their children.', 'from collections import deque\nqueue = deque([root])\nwhile queue:\n    level = []\n    for _ in range(len(queue)):\n        node = queue.popleft()\n        level.append(node.val)\n        if node.left: queue.append(node.left)\n        if node.right: queue.append(node.right)',[
+   step('Begin at the root','The tree root is 8. The queue starts with only the root.',lessonMap([['queue','[8]'],['level','[]'],['visited','[]']]),'queue = deque([root])','BFS uses a queue, not recursive calls.'),
+   step('Process level zero','Remove 8 and add its children 3 and 10. The first level is [8].',lessonMap([['dequeued','8'],['level','[8]'],['queue','[3, 10]']]),'node = queue.popleft()\nqueue.append(node.left)\nqueue.append(node.right)','Children are added left-to-right at the rear.'),
+   step('Process level one','Remove 3 and 10. Add their children 1, 6 and 14. The second level is [3, 10].',lessonMap([['dequeued','3, 10'],['level','[3, 10]'],['queue','[1, 6, 14]']]),'for _ in range(len(queue)):\n    node = queue.popleft()','Capture the queue length before processing a level.'),
+   step('Finish the final level','The remaining leaves form [1, 6, 14]. The full traversal is [[8], [3,10], [1,6,14]].',lessonMap([['level','[1, 6, 14]'],['queue','[]'],['result','[[8], [3,10], [1,6,14]]']]),'return result','Level-order traversal visits nodes in increasing distance from the root.')
+  ]);
+  return lesson('Tree DFS: inorder traversal','Inorder means left subtree, node, right subtree. On a binary search tree this visits values in sorted order.', 'def inorder(node):\n    if not node:\n        return\n    inorder(node.left)\n    result.append(node.val)\n    inorder(node.right)',[
+   step('Start at the root','The root is 8. Inorder does not visit it immediately; it first explores the left subtree.',lessonMap([['root','8'],['rule','left → node → right'],['result','[]']]),'inorder(root.left)','The call stack remembers that 8 must be visited after its left subtree.'),
+   step('Go to the leftmost node','Follow left children 8 → 3 → 1. Node 1 has no left child, so it is visited first.',lessonMap([['path','8 → 3 → 1'],['visit','1'],['result','[1]']]),'if node.left:\n    inorder(node.left)','A missing child is the recursion base case.'),
+   step('Return and visit parents','Return to 3, append it, then explore its right child 6. The result becomes [1,3,6].',lessonMap([['call returns','1 → 3'],['visit','3, then 6'],['result','[1,3,6]']]),'result.append(node.val)\ninorder(node.right)','Returning from recursion resumes the suspended parent call.'),
+   step('Finish the right subtree','Visit 8, then its right child 10. The final inorder result is [1,3,6,8,10].',lessonMap([['visit','8, then 10'],['result','[1,3,6,8,10]'],['property','sorted for a BST']]),'inorder(root)','Traversal is O(n), because each node is visited once.')
+  ]);
+ }
+ if(dayNo===21||has('heap','priority queue','top-k','k-way','median','scheduling','heapq')){
+  return lesson('Min-heap: keep the smallest item on top','A min-heap is a complete binary tree where every parent is no larger than its children. Inserting 3 makes it rise until the rule is restored.', 'import heapq\nh = [5, 9, 8]\nheapq.heapify(h)\nheapq.heappush(h, 3)\nsmallest = heapq.heappop(h)',[
+   step('Start with a valid heap','The array [5,9,8] represents a tree: 5 is the root, and both children are greater than it.',lessonArray([5,9,8],[],[],['parent 5 ≤ children 9, 8']),'h = [5, 9, 8]\nheapq.heapify(h)','A heap is partially ordered; it is not a fully sorted array.'),
+   step('Insert the new value','Add 3 at the next open array position, making [5,9,8,3]. The new value is a child of 9.',lessonArray([5,9,8,3],[3],[],['append at next open position']),'heapq.heappush(h, 3)','The complete-tree shape is preserved.'),
+   step('Bubble 3 upward','3 is smaller than its parent 9, so swap them. It is still smaller than 5, so swap again.',lessonArray([3,5,8,9],[0],[],['3 rises past 9 and 5']),'# heap push restores parent <= child','The heap property is restored when 3 reaches the root.'),
+   step('Pop returns the root','The minimum item is now 3. heappop returns it and then rearranges the remaining values to restore the heap.',lessonMap([['heap before pop','[3,5,8,9]'],['popped','3'],['remaining','valid min-heap']]),'smallest = heapq.heappop(h)','Push and pop both take O(log n).')
+  ]);
+ }
+ if(dayNo===22||dayNo===23||dayNo===24||has('adjacency','connected component','grid dfs','topological','dag','kahn','indegree','union-find','path compression','unweighted shortest path','queue bfs')){
+  if(dayNo===24||has('topological','dag','kahn','indegree'))return lesson('Topological sort: order dependencies','Kahn’s algorithm starts with nodes that have indegree zero. Removing a node reduces the indegree of its outgoing neighbours.', 'from collections import deque\nqueue = deque(nodes_with_indegree_0)\norder = []\nwhile queue:\n    u = queue.popleft()\n    order.append(u)\n    for v in graph[u]:\n        indegree[v] -= 1\n        if indegree[v] == 0: queue.append(v)',[
+   step('Count incoming edges','In A → C and B → C, nodes A and B have indegree 0. C has two prerequisites.',lessonMap([['A','indegree 0'],['B','indegree 0'],['C','indegree 2']]),'queue = deque(["A", "B"])','Only tasks with no unmet prerequisites can start.'),
+   step('Take A from the queue','Append A to the order. Removing A’s edge reduces C’s indegree from 2 to 1.',lessonMap([['order','[A]'],['queue','[B]'],['C indegree','1']]),'u = queue.popleft()\nindegree["C"] -= 1','C still depends on B, so it cannot enter the queue yet.'),
+   step('Take B and unlock C','Append B. Its edge reduces C’s indegree to zero, so C becomes ready and is enqueued.',lessonMap([['order','[A, B]'],['queue','[C]'],['C indegree','0']]),'if indegree[v] == 0:\n    queue.append(v)','A node joins the queue only after every prerequisite is removed.'),
+   step('Complete the order','Remove C. The order A, B, C satisfies both prerequisite edges. If fewer than all nodes are emitted, a cycle exists.',lessonMap([['order','[A, B, C]'],['queue','[]'],['result','valid order']]),'if len(order) != number_of_nodes:\n    cycle exists','Topological sorting is O(V + E).')
+  ]);
+  if(dayNo===24||has('union-find','path compression'))return lesson('Union-Find: connect components','Disjoint Set Union keeps a parent for each component. Find follows parent links; union connects two roots.', 'def find(x):\n    if parent[x] != x:\n        parent[x] = find(parent[x])\n    return parent[x]\n\ndef union(a, b):\n    parent[find(a)] = find(b)',[
+   step('Start with separate sets','Each node is its own parent, so each node represents a separate component.',lessonMap([['parent','A→A'],['parent','B→B'],['parent','C→C']]),'parent = {x: x for x in nodes}','A root is a node that points to itself.'),
+   step('Find the roots','find(A) returns A and find(B) returns B. The roots differ, so the components are separate.',lessonMap([['find(A)','A'],['find(B)','B'],['same set?','No']]),'ra = find(a)\nrb = find(b)','Compare roots, not just the immediate parent values.'),
+   step('Union the two sets','Connect one root to the other. Now A and B belong to the same component.',lessonMap([['parent A','B'],['parent B','B'],['component','{A, B}']]),'parent[ra] = rb','Union joins entire components through their representatives.'),
+   step('Compress a path','If C points to A and A points to B, find(C) can point C directly to B, shortening future finds.',lessonMap([['before','C → A → B'],['after','C → B'],['root','B']]),'parent[x] = find(parent[x])','Path compression makes repeated operations almost constant amortized time.')
+  ]);
+  const dfs=dayNo===22||has('dfs','connected component','cycle detection');
+  return lesson(dfs?'Graph DFS: explore one branch deeply':'Graph BFS: explore in layers',dfs?'Depth-first search follows one neighbour as far as possible, then backtracks. A visited set avoids revisiting nodes.':'Breadth-first search processes neighbours in queue order, visiting all nodes one edge farther away before going deeper.',dfs?'visited = set()\ndef dfs(node):\n    if node in visited: return\n    visited.add(node)\n    for neighbour in graph[node]:\n        dfs(neighbour)':'queue = deque([start])\nvisited = {start}\nwhile queue:\n    node = queue.popleft()\n    for neighbour in graph[node]:\n        if neighbour not in visited:\n            visited.add(neighbour)\n            queue.append(neighbour)',[
+   step('Start at A','The graph has edges A–B, A–C, B–D and C–E. Begin at A and mark it visited.',lessonMap([['start','A'],['visited','{A}'],['neighbours','B, C']]),dfs?'dfs("A")':'queue = deque(["A"])','Mark a node when you discover it.'),
+   step(dfs?'Follow B first':'Process A’s neighbours','DFS chooses B and continues down that branch. BFS removes A and puts B and C into the queue.',lessonMap([[dfs?'current':'dequeued','B / A'],[dfs?'call next':'queue','D / [B, C]'],['visited','{A, B, C}']]),dfs?'dfs("B")':'queue.extend(["B", "C"])',dfs?'DFS explores deeply before returning to C.':'B and C have equal distance from A, so both wait in the queue.'),
+   step(dfs?'Reach D, then backtrack':'Process B, then C','DFS reaches D from B and then returns to A to explore C. BFS processes B and enqueues D, then C and enqueues E.',lessonMap([['frontier','D, C / D, E'],['visited','A, B, C, D'],['rule',dfs?'backtrack when finished':'FIFO queue']]),dfs?'dfs("D")\n# return to A, then visit C':'node = queue.popleft()\n# enqueue unseen neighbours','The traversal order depends on the neighbour order.'),
+   step('Finish the reachable component','Every reachable node is visited exactly once. The visited set prevents infinite revisits when edges form cycles.',lessonMap([['visited','{A, B, C, D, E}'],['result',dfs?'DFS complete':'BFS complete'],['cost','O(V + E)']]),'if neighbour not in visited:\n    visit(neighbour)','Each vertex and edge is processed a constant number of times.')
+  ]);
+ }
+ if(dayNo===25||has('greedy','jump game','decisive property','interval scheduling')){
+  return lesson('Greedy: Jump Game reachability','Track the farthest index reachable so far. If the current index is beyond that frontier, it cannot be reached.', 'nums = [2, 3, 1, 1, 4]\nfarthest = 0\nfor i, jump in enumerate(nums):\n    if i > farthest: return False\n    farthest = max(farthest, i + jump)\nreturn True',[
+   step('Begin at index 0','The first value is 2, so from index 0 we can reach as far as index 2.',lessonArray([2,3,1,1,4],[0],[],['farthest = 0']),'farthest = max(farthest, 0 + 2)','The frontier is the farthest reachable index.'),
+   step('Reach index 1','Index 1 is within the frontier. Its jump length is 3, extending the frontier to index 4.',lessonArray([2,3,1,1,4],[1],[],['farthest = max(2, 1 + 3) = 4']),'farthest = max(farthest, i + jump)','One good reachable position can extend the frontier.'),
+   step('Check later positions','Indices 2 and 3 are also within the frontier. Their jumps do not extend it beyond 4.',lessonArray([2,3,1,1,4],[2,3],[],['frontier remains 4']),'if i > farthest:\n    return False','We only need the maximum frontier, not every path.'),
+   step('The last index is reachable','The target index 4 is no farther than the frontier. The greedy scan reaches the end.',lessonArray([2,3,1,1,4],[4],[],['4 ≤ farthest 4','return True']),'return True','The farthest-reachable invariant makes this linear: O(n).')
+  ]);
+ }
+ if(dayNo===26||dayNo===27||has('dynamic programming','memoization','tabulation','1d dp','2d/grid dp','state/transition','knapsack','lcs','coin change','choose/skip')){
+  return lesson('Dynamic programming: House Robber','At each house, either skip it and keep the previous best, or rob it and add its value to the best from two houses back.', 'nums = [2, 7, 9, 3, 1]\ndp = [0] * (len(nums) + 1)\nfor i, value in enumerate(nums, 1):\n    dp[i] = max(dp[i-1], value + dp[i-2])\nreturn dp[-1]',[
+   step('Define the state','dp[i] means the maximum amount we can rob from the first i houses. The first two answers are 0 and 2.',lessonTable(['Houses considered','0','1','2','3','4','5'],[['dp','0','2','?','?','?','?']]),'dp[0] = 0\ndp[1] = nums[0]','The meaning of the state must be clear before the recurrence.'),
+   step('Choose: skip or rob','For house 2 (value 7), skip gives 2; rob gives 7 + dp[0] = 7. Choose 7.',lessonTable(['i','0','1','2','3','4','5'],[['Value','—','2','7','9','3','1'],['dp','0','2','7','?','?','?']]),'dp[i] = max(dp[i-1], nums[i-1] + dp[i-2])','Never rob adjacent houses, which is why the rob option uses i−2.'),
+   step('Compute the next houses','For value 9: max(7, 9+2) = 11. For value 3: max(11, 3+7) = 11.',lessonTable(['i','0','1','2','3','4','5'],[['Value','—','2','7','9','3','1'],['dp','0','2','7','11','11','?']]),'dp[3] = max(7, 9 + 2)\ndp[4] = max(11, 3 + 7)','Each answer reuses earlier answers instead of exploring every subset.'),
+   step('Finish the table','For the final value 1, max(11, 1+11) = 12. The best amount is 12 by robbing houses with values 2, 9 and 1.',lessonTable(['i','0','1','2','3','4','5'],[['Value','—','2','7','9','3','1'],['dp','0','2','7','11','11','12']]),'return dp[-1]','The table takes O(n) time and O(n) space; it can be reduced to O(1) space.')
+  ]);
+ }
+ if(dayNo===7||dayNo===14||dayNo===28||has('re-solve','missed question','identify patterns','mixed pattern','brute force','timed interview','clarify constraint','optimize','mock')){
+  return lesson('A repeatable interview-solving method','Do not jump straight into code. Clarify the problem, produce a baseline, use constraints to choose a pattern, and verify the result.', '1. Restate the input and output\n2. Work a small example by hand\n3. State brute force and its cost\n4. Improve using a known pattern\n5. Test edge cases and explain complexity',[
+   step('Clarify the contract','For Two Sum, confirm whether exactly one answer exists, whether values can repeat, and whether indices—not values—must be returned.',lessonMap([['input','integer array'],['target','integer'],['output','two indices']]),'Restate the problem in your own words.','Clear constraints prevent solving the wrong problem.'),
+   step('Build a baseline','Try every pair. This is easy to reason about, but it takes O(n²) time.',lessonMap([['approach','nested pair loops'],['time','O(n²)'],['space','O(1)']]),'for i in range(n):\n    for j in range(i + 1, n):\n        check(nums[i] + nums[j])','A correct brute-force solution gives a reference point.'),
+   step('Choose a better pattern','A hash map remembers previous values. For each number, look up the complement needed to reach the target.',lessonMap([['pattern','hash map'],['time','O(n) expected'],['space','O(n)']]),'need = target - x\nif need in seen: return [seen[need], i]','Use the input constraints to justify the data structure.'),
+   step('Test and explain','Check duplicates, negative values, and the smallest valid input. Then explain why the map lookup is correct and state time and space costs.',lessonMap([['normal','[2,7] → 9'],['duplicate','[3,3] → 6'],['negative','[-1,4] → 3'],['cost','O(n) time / O(n) space']]),'Test edge cases before submitting.','A strong interview answer includes reasoning, not only working code.')
+  ]);
+ }
+ if(has('palindrome','character scans','substring','subsequence','string building','string')){
+  return lesson('Strings: check a palindrome with two pointers','A palindrome reads the same in both directions. Compare the leftmost and rightmost characters, then move inward.', 's = "racecar"\nleft, right = 0, len(s) - 1\nwhile left < right:\n    if s[left] != s[right]:\n        return False\n    left += 1\n    right -= 1\nreturn True',[
+   step('Place pointers at the ends','For racecar, left points to r and right points to r. They are the characters that must match first.',lessonArray(['r','a','c','e','c','a','r'],[0,6],[],['left = 0','right = 6']),'left = 0\nright = len(s) - 1','A mismatch would immediately prove it is not a palindrome.'),
+   step('Compare and move inward','The outer pair r/r matches. Move both pointers one position toward the centre.',lessonArray(['r','a','c','e','c','a','r'],[1,5],[0,6],['r == r ✓']),'left += 1\nright -= 1','Only the unmatched inner section remains to check.'),
+   step('Repeat the comparison','The next pair a/a matches, then c/c matches. The pointers keep moving inward.',lessonArray(['r','a','c','e','c','a','r'],[2,4],[0,1,5,6],['a == a ✓','c == c ✓']),'if s[left] != s[right]:\n    return False','Every mirrored pair must match.'),
+   step('The pointers meet','The pointers reach the middle e. All outer pairs matched, so the string is a palindrome.',lessonArray(['r','a','c','e','c','a','r'],[3],[0,1,2,4,5,6],['all pairs matched']), 'return True','This uses O(n) time and O(1) extra space.')
+  ]);
+ }
+ if(has('matrix','matrices','grid')){
+  return lesson('Matrix traversal: visit each cell','A matrix is a 2D grid. Nested loops visit each row and each column exactly once.', 'for r in range(rows):\n    for c in range(cols):\n        visit(grid[r][c])',[
+   step('Read the grid dimensions','This grid has 2 rows and 3 columns. A cell is identified by its row and column indices.',lessonTable(['','col 0','col 1','col 2'],[['row 0','1','2','3'],['row 1','4','5','6']]),'rows = 2\ncols = 3','Indices start at zero in Python.'),
+   step('Finish row zero','The inner loop visits columns 0, 1 and 2 before the outer loop moves to the next row.',lessonTable(['','col 0','col 1','col 2'],[['row 0','1 ✓','2 ✓','3 ✓'],['row 1','4','5','6']]),'for c in range(cols):\n    visit(grid[0][c])','The inner loop changes columns while the row stays fixed.'),
+   step('Move to row one','The outer loop advances to row 1, then the inner loop scans all three columns again.',lessonTable(['','col 0','col 1','col 2'],[['row 0','1 ✓','2 ✓','3 ✓'],['row 1','4 ✓','5 ✓','6 ✓']]),'for r in range(rows):\n    for c in range(cols):','Every cell is visited exactly once.'),
+   step('Count the work','There are rows × columns cells. Time is O(R × C); the traversal itself uses O(1) extra space.',lessonMap([['rows','2'],['columns','3'],['visited','2 × 3 = 6']]),'for r in range(R):\n    for c in range(C):\n        visit(grid[r][c])','This same structure appears in grid DFS and BFS problems.')
+  ]);
+ }
+ if(has('python syntax','lists/tuples','lists/tuple','traversal','in-place','kadane','array')||dayNo===3||dayNo===1){
+  return lesson('Array traversal: update a running total','Arrays store values at indexed positions. A single pass can read each value once and update a running result.', 'nums = [3, 1, 4, 2]\ntotal = 0\nfor i, value in enumerate(nums):\n    total += value\nreturn total',[
+   step('Start before the first item','The array is [3,1,4,2]. Index 0 is the first position and the running total starts at zero.',lessonArray([3,1,4,2],[],[],['index = 0','total = 0']),'total = 0','An array index identifies a value’s position.'),
+   step('Read index zero','Read value 3 and add it to total. The pointer now advances to index 1.',lessonArray([3,1,4,2],[0],[],['read 3','total = 3']),'total += nums[0]','The total contains the sum of everything visited so far.'),
+   step('Continue the scan','Add 1, then 4. The running total becomes 8 after three positions.',lessonArray([3,1,4,2],[2],[0,1],['read 4','total = 8']),'total += nums[i]','Each element is processed once.'),
+   step('Finish the last item','Add 2 to get 10. The loop ends after index 3, having visited all four elements.',lessonArray([3,1,4,2],[3],[0,1,2],['total = 10','4 values visited']),'return total','A traversal takes O(n) time. Updating values in place avoids a second array.')
+  ]);
+ }
+ // Every remaining concept still gets a deliberate, instructional example rather than a decorative animation.
+ return lesson('Understand → model → verify','Use a small concrete input. Track the state before and after each operation, then check the result against the rule for this concept.', '1. Write a tiny example\n2. State the invariant or rule\n3. Apply one operation\n4. Check the new state',[
+  step('Choose a tiny input','Use the smallest example that still demonstrates the idea. Small inputs make every operation visible.',lessonMap([['input','[2, 1, 3]'],['state','not processed'],['goal','understand the rule']]),'example = [2, 1, 3]','A tiny example is easier to trace than a full problem.'),
+  step('State the rule','Describe what must remain true before and after each operation. This is the invariant that guides the algorithm.',lessonMap([['invariant','must stay true'],['operation','one careful step'],['check','did the rule hold?']]),'# State the invariant before coding','The invariant explains why the algorithm is correct.'),
+  step('Apply one operation','Change one part of the data structure and observe exactly what changed. Avoid skipping intermediate states.',lessonMap([['before','[2, 1, 3]'],['operation','process index 0'],['after','[2, 1, 3]']]),'# Update only the state required','A visual walkthrough should make every state transition explicit.'),
+  step('Verify the outcome','Check the final result, then test an empty, tiny or repeated-value input to expose boundary errors.',lessonMap([['normal case','passes'],['boundary case','check'],['complexity','explain']]),'# Test edge cases and complexity','Never trust an algorithm until its assumptions and edge cases are clear.')
+ ]);
 }
-let activeVisualModal=null;
-function closeVisualDemo(){if(activeVisualModal){activeVisualModal.remove();activeVisualModal=null;document.removeEventListener('keydown',visualEscapeHandler);}}
-function visualEscapeHandler(e){if(e.key==='Escape')closeVisualDemo();}
-function openVisualDemo(topic,cfg){
+let activeVisualModal=null,activeVisualStep=0,activeVisualLesson=null;
+function closeVisualDemo(){
+ if(activeVisualModal){activeVisualModal.remove();activeVisualModal=null;activeVisualLesson=null;document.removeEventListener('keydown',visualEscapeHandler);}
+}
+function visualEscapeHandler(event){if(event.key==='Escape')closeVisualDemo();}
+function renderVisualStep(){
+ if(!activeVisualModal||!activeVisualLesson)return;
+ const lesson=activeVisualLesson,step=lesson.steps[activeVisualStep],$id=id=>activeVisualModal.querySelector('#'+id);
+ $id('visualStepCount').textContent='STEP '+(activeVisualStep+1)+' OF '+lesson.steps.length;
+ $id('visualProgressFill').style.width=((activeVisualStep+1)/lesson.steps.length*100)+'%';
+ $id('visualStepHeading').textContent=step.label;
+ $id('visualStage').innerHTML=step.diagram;
+ $id('visualExplanation').textContent=step.explanation;
+ $id('visualCode').textContent=step.code||lesson.code;
+ $id('visualInsight').textContent=step.insight||lesson.intro;
+ $id('visualPrev').disabled=activeVisualStep===0;
+ $id('visualNext').textContent=activeVisualStep===lesson.steps.length-1?'Start again ↺':'Next step →';
+ $id('visualEndLabel').textContent=activeVisualStep===lesson.steps.length-1?'Walkthrough complete':'Follow the state change';
+}
+function openVisualDemo(topic,dayNo){
  closeVisualDemo();
- const overlay=create('div','visual-modal-overlay'),dialog=create('section','visual-dialog');dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-labelledby','visual-demo-title');
- const head=create('div','visual-dialog-head'),titles=create('div'),kicker=create('div','visual-kicker','Nami’s mini visual lab · 6-second loop'),title=create('h3','',cfg.title);title.id='visual-demo-title';titles.append(kicker,title);const sub=create('p','visual-sub',topic);titles.append(sub);
+ activeVisualLesson=buildVisualLesson(topic,dayNo);activeVisualStep=0;
+ const overlay=create('div','visual-modal-overlay'),dialog=create('section','visual-dialog');
+ dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-labelledby','visual-demo-title');
+ const head=create('div','visual-dialog-head'),titles=create('div');
+ titles.append(create('div','visual-kicker','Nami’s concept lab · learn one operation at a time'));
+ const title=create('h3','',''+activeVisualLesson.title);title.id='visual-demo-title';titles.append(title);
+ titles.append(create('p','visual-sub',activeVisualLesson.intro));
  const close=create('button','visual-close','×');close.type='button';close.setAttribute('aria-label','Close visualisation');close.addEventListener('click',closeVisualDemo);head.append(titles,close);
- const stage=create('div','visual-stage');stage.innerHTML=visualSceneMarkup(cfg.kind);
- const steps=create('div','visual-steps');cfg.steps.forEach((x,i)=>{const el=create('div','visual-step');el.append(create('b','','STEP 0'+(i+1)),document.createTextNode(x));steps.append(el);});
- const tip=create('p','visual-tip',cfg.tip),foot=create('div','visual-foot'),loop=create('span','visual-loop','AUTOPLAYS · QUIET LOOP · NO AUDIO'),replay=create('button','visual-replay','↻ Replay');replay.type='button';replay.addEventListener('click',()=>{[stage,steps].forEach(target=>{const html=target.innerHTML;target.innerHTML='';target.innerHTML=html;});});foot.append(loop,replay);
- dialog.append(head,stage,steps,tip,foot);overlay.append(dialog);overlay.addEventListener('click',e=>{if(e.target===overlay)closeVisualDemo();});document.body.append(overlay);activeVisualModal=overlay;document.addEventListener('keydown',visualEscapeHandler);close.focus();
+ const progress=create('div','visual-progress'),fill=create('span');fill.id='visualProgressFill';progress.append(fill);
+ const meta=create('div','visual-step-meta'),count=create('span','','STEP 1 OF '+activeVisualLesson.steps.length);count.id='visualStepCount';meta.append(count,create('span','','Move at your own pace'));
+ const heading=create('div','visual-step-heading');heading.id='visualStepHeading';
+ const stage=create('div','visual-stage');stage.id='visualStage';
+ const explanation=create('p','visual-explanation');explanation.id='visualExplanation';
+ const codeWrap=create('div','visual-code-wrap');codeWrap.append(create('div','visual-code-label','Python logic at this step'));const code=create('pre','visual-code');code.id='visualCode';codeWrap.append(code);
+ const insight=create('div','visual-callout');insight.id='visualInsight';
+ const controls=create('div','visual-controls'),group=create('div','visual-control-group');
+ const prev=create('button','visual-nav','← Previous');prev.type='button';prev.id='visualPrev';prev.addEventListener('click',()=>{if(activeVisualStep>0){activeVisualStep--;renderVisualStep();}});
+ const next=create('button','visual-nav primary','Next step →');next.type='button';next.id='visualNext';next.addEventListener('click',()=>{if(activeVisualStep<activeVisualLesson.steps.length-1)activeVisualStep++;else activeVisualStep=0;renderVisualStep();});
+ const endLabel=create('span','visual-end-label','Follow the state change');endLabel.id='visualEndLabel';group.append(prev,next);controls.append(group,endLabel);
+ dialog.append(head,progress,meta,heading,stage,explanation,codeWrap,insight,controls);
+ overlay.append(dialog);overlay.addEventListener('click',event=>{if(event.target===overlay)closeVisualDemo();});
+ document.body.append(overlay);activeVisualModal=overlay;document.addEventListener('keydown',visualEscapeHandler);renderVisualStep();close.focus();
 }
 
-function renderSprint(){const root=$('sprintPlan');if(!root)return;root.replaceChildren();SPRINT_WEEKS.forEach((week,wi)=>{const card=create('article','sprint-week'),head=create('div','sprint-week-head');head.append(create('b','',week.title),create('span','',week.goal));const bar=create('div','sprint-progress'),fill=create('span'),daysDone=week.days.filter((d,di)=>!!state.sprintDone['day-'+(wi*7+di+1)]).length;fill.style.width=(daysDone/7*100)+'%';bar.append(fill);head.append(bar,create('div','sprint-summary',daysDone+' of 7 days complete'));card.append(head);week.days.forEach((d,di)=>{const dayNo=wi*7+di+1,id='day-'+dayNo,done=!!state.sprintDone[id],detail=SPRINT_DETAILS[dayNo-1],selected=SPRINT_RESOURCES[dayNo-1]||SPRINT_RESOURCES[0],row=create('div','sprint-day'+(done?' done':'')),top=create('div','sprint-day-top'),check=create('input','sprint-check');check.type='checkbox';check.checked=done;check.id='sprint-'+id;check.setAttribute('aria-label','Mark day '+dayNo+' complete');check.addEventListener('change',()=>{state.sprintDone[id]=check.checked;markActive();saveState();renderSprint();renderStats();});const copy=create('div','sprint-day-copy');copy.append(create('strong','','Day '+dayNo+' · '+d[0]),create('p','',d[1]));top.append(check,copy);row.append(top);const sub=create('details','sprint-subtopics');sub.append(create('summary','','🧭 Open the chart room · '+detail.topics.length+' learning stops'));const subList=create('div','sprint-subtopic-list');detail.topics.forEach((t,ti)=>{const item=create('details','sprint-subtopic-item'),title=create('summary','',t);title.setAttribute('aria-label','Open learning resources for '+t);item.append(title);const resources=resourcesForSubtopic(t,dayNo,selected,detail),panel=create('div','sprint-subtopic-panel');panel.append(create('p','sprint-subtopic-hint',resources.hint));const actions=create('div','sprint-subtopic-actions');resources.links.forEach(r=>{const isVisual=r.kind==='visual',a=create(isVisual?'button':'a','subtopic-resource '+r.kind);if(isVisual){a.type='button';a.addEventListener('click',()=>openVisualDemo(t,resources.visual));}else{a.href=r.url;a.target='_blank';a.rel='noopener noreferrer';}a.setAttribute('aria-label',r.label+': '+r.detail);const icon=create('span','subtopic-resource-icon',r.icon),copy=create('span','subtopic-resource-copy');copy.append(create('b','',r.label),create('small','',r.detail));a.append(icon,copy,create('span','subtopic-resource-arrow',isVisual?'▶':'↗'));actions.append(a);});panel.append(actions);item.append(panel);subList.append(item);});sub.append(subList);row.append(sub);const links=create('div','sprint-links'),learn=create('a','video','🎥 Topic video ↗');learn.href=selected.video.url;learn.target='_blank';learn.rel='noopener noreferrer';links.append(learn);const deep=create('a','video','🐍 Python DSA course ↗');deep.href='https://neetcode.io/courses/dsa-for-beginners/0';deep.target='_blank';deep.rel='noopener noreferrer';links.append(deep);const read=create('a','article','📖 Read article ↗');read.href=selected.article.url;read.target='_blank';read.rel='noopener noreferrer';links.append(read);const easy=create('a','easy','Easy practice ↗');easy.href=d[3];easy.target='_blank';easy.rel='noopener noreferrer';links.append(easy);const medium=create('a','medium','Medium practice ↗');medium.href=d[4];medium.target='_blank';medium.rel='noopener noreferrer';links.append(medium);row.append(links);const more=create('details','sprint-more-practice');more.append(create('summary','','More practice problems · '+detail.extra.length));const extras=create('div','sprint-extra-links');detail.extra.forEach((url,i)=>{const a=create('a','','Extra '+(i+1)+' ↗');a.href=url;a.target='_blank';a.rel='noopener noreferrer';extras.append(a);});more.append(extras);row.append(more);card.append(row);});root.append(card);});}
+function renderSprint(){const root=$('sprintPlan');if(!root)return;root.replaceChildren();SPRINT_WEEKS.forEach((week,wi)=>{const card=create('article','sprint-week'),head=create('div','sprint-week-head');head.append(create('b','',week.title),create('span','',week.goal));const bar=create('div','sprint-progress'),fill=create('span'),daysDone=week.days.filter((d,di)=>!!state.sprintDone['day-'+(wi*7+di+1)]).length;fill.style.width=(daysDone/7*100)+'%';bar.append(fill);head.append(bar,create('div','sprint-summary',daysDone+' of 7 days complete'));card.append(head);week.days.forEach((d,di)=>{const dayNo=wi*7+di+1,id='day-'+dayNo,done=!!state.sprintDone[id],detail=SPRINT_DETAILS[dayNo-1],selected=SPRINT_RESOURCES[dayNo-1]||SPRINT_RESOURCES[0],row=create('div','sprint-day'+(done?' done':'')),top=create('div','sprint-day-top'),check=create('input','sprint-check');check.type='checkbox';check.checked=done;check.id='sprint-'+id;check.setAttribute('aria-label','Mark day '+dayNo+' complete');check.addEventListener('change',()=>{state.sprintDone[id]=check.checked;markActive();saveState();renderSprint();renderStats();});const copy=create('div','sprint-day-copy');copy.append(create('strong','','Day '+dayNo+' · '+d[0]),create('p','',d[1]));top.append(check,copy);row.append(top);const sub=create('details','sprint-subtopics');sub.append(create('summary','','🧭 Open the chart room · '+detail.topics.length+' learning stops'));const subList=create('div','sprint-subtopic-list');detail.topics.forEach((t,ti)=>{const item=create('details','sprint-subtopic-item'),title=create('summary','',t);title.setAttribute('aria-label','Open learning resources for '+t);item.append(title);const resources=resourcesForSubtopic(t,dayNo,selected,detail),panel=create('div','sprint-subtopic-panel');panel.append(create('p','sprint-subtopic-hint',resources.hint));const actions=create('div','sprint-subtopic-actions');resources.links.forEach(r=>{const isVisual=r.kind==='visual',a=create(isVisual?'button':'a','subtopic-resource '+r.kind);if(isVisual){a.type='button';a.addEventListener('click',()=>openVisualDemo(t,dayNo));}else{a.href=r.url;a.target='_blank';a.rel='noopener noreferrer';}a.setAttribute('aria-label',r.label+': '+r.detail);const icon=create('span','subtopic-resource-icon',r.icon),copy=create('span','subtopic-resource-copy');copy.append(create('b','',r.label),create('small','',r.detail));a.append(icon,copy,create('span','subtopic-resource-arrow',isVisual?'▶':'↗'));actions.append(a);});panel.append(actions);item.append(panel);subList.append(item);});sub.append(subList);row.append(sub);const links=create('div','sprint-links'),learn=create('a','video','🎥 Topic video ↗');learn.href=selected.video.url;learn.target='_blank';learn.rel='noopener noreferrer';links.append(learn);const deep=create('a','video','🐍 Python DSA course ↗');deep.href='https://neetcode.io/courses/dsa-for-beginners/0';deep.target='_blank';deep.rel='noopener noreferrer';links.append(deep);const read=create('a','article','📖 Read article ↗');read.href=selected.article.url;read.target='_blank';read.rel='noopener noreferrer';links.append(read);const easy=create('a','easy','Easy practice ↗');easy.href=d[3];easy.target='_blank';easy.rel='noopener noreferrer';links.append(easy);const medium=create('a','medium','Medium practice ↗');medium.href=d[4];medium.target='_blank';medium.rel='noopener noreferrer';links.append(medium);row.append(links);const more=create('details','sprint-more-practice');more.append(create('summary','','More practice problems · '+detail.extra.length));const extras=create('div','sprint-extra-links');detail.extra.forEach((url,i)=>{const a=create('a','','Extra '+(i+1)+' ↗');a.href=url;a.target='_blank';a.rel='noopener noreferrer';extras.append(a);});more.append(extras);row.append(more);card.append(row);});root.append(card);});}
 function renderMySpace(){ $('paceSelect').value=state.pace;$('notesBox').value=state.notes;const root=$('weekPlan');root.replaceChildren();(state.pace==='4'?[['Week 1','Python, Big-O, arrays, strings, hashing'],['Week 2','Two pointers, sliding windows, sorting, binary search'],['Week 3','Linked lists, stacks, queues, recursion, trees, heaps'],['Week 4','Graphs, greedy, DP basics, timed mixed practice']]:plans[state.pace]||plans['12']).forEach(([week,topic])=>{const el=create('div','week');el.append(create('b','',week),create('span','',topic));root.append(el);});}
 function exportBackup(){const backup={app:'Shivanya Grand Line DSA',version:2,exportedAt:new Date().toISOString(),state};const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=create('a');a.href=url;a.download='shivanya-grand-line-progress.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);showToast('Progress backup downloaded ✨');}
 function importBackup(file){
