@@ -459,6 +459,14 @@ function buildVisualLesson(topic,dayNo){
    step('Compare the growth','At n = 16, the three examples take 1, 16 and 256 operations. Big-O focuses on this growth trend, not machine speed.',lessonTable(['Input n','O(1)','O(n)','O(n²)'],rows.slice(1),2),'# Ignore constants and lower-order terms\n# Keep the dominant growth rate','This is why an O(n) approach can beat O(n²) on large inputs.')
   ]);
  }
+
+ if(dayNo===4&&has('frequency counts'))return lesson('Character frequency: count without rescanning','A dictionary stores how many times each character has appeared. Each character updates one counter.', 's = "banana"\ncounts = {}\nfor ch in s:\n    counts[ch] = counts.get(ch, 0) + 1',[
+  step('Start with no counts','The string is banana. The map starts empty because no characters have been read.',lessonMap([['input','banana'],['counts','{}']]),'counts = {}','Each map key is a character.'),
+  step('Read the first characters','Read b, then a. Each is new, so create a count of 1.',lessonMap([['read','b, a'],['b','1'],['a','1']]),'counts[ch] = counts.get(ch, 0) + 1','get(ch, 0) gives zero when a character is not present yet.'),
+  step('See a repeated character','The next a already has count 1, so increment it to 2. The second n creates its own entry.',lessonMap([['a','2'],['n','2'],['b','1']]),'counts[ch] += 1','Repeated characters update the same key; they do not create duplicate keys.'),
+  step('Complete the count','After scanning banana, a appears 3 times, n appears 2 times and b appears once.',lessonMap([['a','3'],['n','2'],['b','1'],['total','6 characters']]),'return counts','One pass takes O(n) expected time and O(k) space for k distinct characters.')
+ ]);
+
  if(dayNo===5||has('dict/set','dict/set operations','hash lookup','frequency','counter','defaultdict','deduplication')){
   const twoSum=has('two sum')||dayNo===5;
   return lesson('Hash map: solve Two Sum','Use a dictionary to remember values already seen. For each number, look up the complement needed to reach the target.', 'nums = [2, 7, 11, 15]\ntarget = 9\nseen = {}\nfor i, x in enumerate(nums):\n    need = target - x\n    if need in seen:\n        return [seen[need], i]\n    seen[x] = i',[
@@ -509,6 +517,14 @@ function buildVisualLesson(topic,dayNo){
   ]);
  }
 
+
+ if(dayNo===15&&has('remove nth'))return lesson('Remove the Nth node from the end','Keep a gap of n nodes between fast and slow pointers. When fast reaches the end, slow is just before the node to remove.', 'dummy = ListNode(0, head)\nslow = fast = dummy\nfor _ in range(n):\n    fast = fast.next\nwhile fast.next:\n    slow = slow.next\n    fast = fast.next\nslow.next = slow.next.next',[
+  step('Create a dummy node','The dummy node handles removing the head with the same pointer logic as any other node.',lessonMap([['list','dummy → 1 → 2 → 3 → 4 → 5'],['n','2'],['slow / fast','dummy']]),'dummy = ListNode(0, head)','The dummy is positioned before the real head.'),
+  step('Move fast ahead by n','Move fast two nodes forward. It points to node 2, while slow remains at dummy.',lessonMap([['slow','dummy'],['fast','2'],['gap','2 nodes']]),'for _ in range(n):\n    fast = fast.next','The fixed gap is what makes the end-relative position possible.'),
+  step('Move both pointers together','Move slow and fast one node at a time until fast reaches the tail. Slow ends at node 3, just before node 4.',lessonMap([['slow','3'],['fast','5'],['gap','2 nodes']]),'while fast.next:\n    slow = slow.next\n    fast = fast.next','Because the gap stays constant, slow trails the end by n nodes.'),
+  step('Skip the target node','Node 4 is the 2nd node from the end. Redirect node 3 to node 5, removing node 4.',lessonMap([['before','3 → 4 → 5'],['after','3 → 5'],['result','1 → 2 → 3 → 5']]),'slow.next = slow.next.next\nreturn dummy.next','One pass after the gap setup gives O(n) time and O(1) space.')
+ ]);
+
  if(dayNo===15&&has('cycle'))return lesson('Linked list cycle: detect a repeated node','A cycle means a next pointer eventually leads back to a node already visited. Floyd’s slow/fast pointers detect it with O(1) extra space.','slow = fast = head\nwhile fast and fast.next:\n    slow = slow.next\n    fast = fast.next.next\n    if slow is fast: return True\nreturn False',[
   step('Follow the links','The list is 1 → 2 → 3 → 4, and node 4 points back to node 2.',lessonMap([['links','1 → 2 → 3 → 4'],['tail','4 → 2'],['cycle','yes']]),'slow = fast = head','A cyclic list never reaches None.'),
   step('Move at different speeds','Slow follows one link and fast follows two. Their positions begin to separate around the cycle.',lessonMap([['slow','2'],['fast','3'],['moves','1 and 2 links']]),'slow = slow.next\nfast = fast.next.next','Different speeds create relative movement around the cycle.'),
@@ -538,6 +554,14 @@ function buildVisualLesson(topic,dayNo){
    step('Close the outer bracket','The final ) matches the remaining (. The stack is empty, so every bracket was closed correctly.',lessonMap([['read',')'],['stack','[]'],['result','valid ✓']]),'return not stack','A valid sequence must finish with an empty stack.')
   ]);
  }
+
+ if(dayNo===17&&has('queue using stacks'))return lesson('Queue using two stacks','Use one stack for incoming items and one for outgoing items. Reverse the incoming stack only when the outgoing stack is empty.', 'incoming, outgoing = [], []\ndef enqueue(x): incoming.append(x)\ndef dequeue():\n    if not outgoing:\n        while incoming:\n            outgoing.append(incoming.pop())\n    return outgoing.pop()',[
+  step('Enqueue three values','Push 1, 2 and 3 onto the incoming stack. The newest item is on top.',lessonMap([['incoming stack','bottom 1, 2, 3 top'],['outgoing stack','empty'],['queue order','1, 2, 3']]),'incoming.append(x)','The incoming stack reverses the insertion order.'),
+  step('Prepare the outgoing stack','To dequeue, transfer all items by popping incoming and pushing outgoing. Its top is now 1.',lessonMap([['incoming stack','empty'],['outgoing stack','bottom 3, 2, 1 top'],['next out','1']]),'while incoming:\n    outgoing.append(incoming.pop())','Two reversals restore FIFO order.'),
+  step('Dequeue the oldest item','Pop from outgoing and return 1. The remaining outgoing stack has 2 on top, then 3.',lessonMap([['returned','1'],['outgoing stack','bottom 3, 2 top'],['next out','2']]),'return outgoing.pop()','The oldest enqueued item is removed first.'),
+  step('Amortized efficiency','Each item moves from incoming to outgoing at most once. A single dequeue may be O(n), but the amortized cost per operation is O(1).',lessonMap([['enqueue','O(1)'],['dequeue','O(1) amortized'],['transfer','once per item']]),'if not outgoing:\n    transfer all incoming','The expensive reversal is not repeated for every dequeue.')
+ ]);
+
  if(dayNo===17||has('queue','deque','fifo','multi-source','queue using stacks','level bfs')){
   return lesson('Queue: breadth-first processing','A queue is first-in, first-out. BFS uses it to process a graph in layers: enqueue neighbours, then process the oldest waiting node.', 'from collections import deque\nqueue = deque(["A"])\nvisited = {"A"}\nwhile queue:\n    node = queue.popleft()\n    for neighbour in graph[node]:\n        if neighbour not in visited:\n            visited.add(neighbour)\n            queue.append(neighbour)',[
    step('Enqueue the start node','The queue contains A. A is marked visited when it is added, which prevents duplicate enqueues.',lessonMap([['queue front','A'],['visited','{A}'],['action','start BFS']]),'queue = deque(["A"])\nvisited = {"A"}','The front of the queue is the next item to process.'),
@@ -580,6 +604,14 @@ function buildVisualLesson(topic,dayNo){
    step('Undo and explore the other branch','Pop 2, then pop 1. The path returns to []; the skip branches produce [1], [2] and [].',lessonMap([['undo','pop 2, pop 1'],['path','[]'],['all subsets','[1,2], [1], [2], []']]),'path.pop()\ndfs(i + 1)','Backtracking restores the state before exploring another choice.')
   ]);
  }
+
+ if(dayNo===20&&has('bst','validate bst'))return lesson('Validate a BST with lower and upper bounds','Every node must fit the range imposed by all its ancestors—not just be larger than its immediate left child.', 'def valid(node, low=float("-inf"), high=float("inf")):\n    if not node: return True\n    if not low < node.val < high: return False\n    return valid(node.left, low, node.val) and valid(node.right, node.val, high)',[
+  step('Check the root','Root 8 has no bounds yet, so any valid integer can be its value.',lessonMap([['node','8'],['lower bound','−∞'],['upper bound','+∞']]),'valid(root, -inf, +inf)','The root defines the first pair of bounds.'),
+  step('Pass bounds to the left','Every value in the left subtree must be less than 8. Node 3 receives the range (−∞, 8).',lessonMap([['node','3'],['allowed range','(−∞, 8)'],['check','3 fits ✓']]),'valid(node.left, low, node.val)','A node inherits the ancestor’s lower bound and the parent as its upper bound.'),
+  step('Pass bounds to the right child of 3','Node 6 is in the right subtree of 3 but still in the left subtree of 8. Its allowed range is (3, 8).',lessonMap([['node','6'],['allowed range','(3, 8)'],['check','6 fits ✓']]),'valid(node.right, node.val, high)','This catches cases where a child fits its parent but violates an ancestor.'),
+  step('Reject an invalid value','If node 9 appears anywhere in the left subtree of 8, it violates the upper bound 8—even if its own parent is smaller.',lessonMap([['node','9'],['allowed range','(3, 8)'],['check','9 is too large ✕']]),'if not low < node.val < high:\n    return False','The whole-tree bound check validates every node in O(n) time.')
+ ]);
+
  if(dayNo===19||dayNo===20||has('pre/in/postorder','tree dfs','binary tree','tree traversal','level-order','bst properties','validate bst','lca','serialize','height/diameter','path sum','balance')){
   const bfs=dayNo===20||has('level-order','level bfs','bst');
   if(bfs)return lesson('Tree BFS: level-order traversal','A queue stores the nodes waiting to be visited. Process the current queue size as one level, then enqueue their children.', 'from collections import deque\nqueue = deque([root])\nwhile queue:\n    level = []\n    for _ in range(len(queue)):\n        node = queue.popleft()\n        level.append(node.val)\n        if node.left: queue.append(node.left)\n        if node.right: queue.append(node.right)',[
@@ -633,6 +665,20 @@ function buildVisualLesson(topic,dayNo){
   ]);
  }
 
+
+ if(dayNo===27&&has('coin change'))return lesson('Coin change: build the minimum-coin table','dp[a] is the fewest coins needed to make amount a. For each amount, try every coin and reuse the best smaller amount.', 'coins = [1, 2, 5]\namount = 5\ndp = [0] + [float("inf")] * amount\nfor a in range(1, amount + 1):\n    for coin in coins:\n        if coin <= a:\n            dp[a] = min(dp[a], 1 + dp[a-coin])',[
+  step('Set the base state','Making amount zero requires zero coins. Every positive amount starts as unreachable (infinity).',lessonTable(['amount','0','1','2','3','4','5'],[['dp','0','∞','∞','∞','∞','∞']]),'dp[0] = 0','The base case anchors all later amounts.'),
+  step('Make amount one','Using coin 1, amount 1 needs one coin. dp[1] becomes 1.',lessonTable(['amount','0','1','2','3','4','5'],[['dp','0','1','∞','∞','∞','∞']]),'dp[1] = min(dp[1], 1 + dp[0])','A state uses an already computed smaller amount.'),
+  step('Build amount three','For amount 3, choose coin 1 after amount 2, or coin 2 after amount 1. Both give two coins.',lessonTable(['amount','0','1','2','3','4','5'],[['dp','0','1','1','2','∞','∞']]),'dp[a] = min(dp[a], 1 + dp[a-coin])','Try every allowed coin and keep the minimum.'),
+  step('Build the target amount','For amount 5, coin 5 gives one coin, which is better than 2 + 2 + 1. The answer is 1.',lessonTable(['amount','0','1','2','3','4','5'],[['dp','0','1','1','2','2','1']]),'return dp[amount]','The time complexity is O(amount × number of coins).')
+ ]);
+ if(dayNo===27&&has('knapsack'))return lesson('0/1 Knapsack: choose or skip each item','For each item and capacity, compare skipping it with taking it plus the best value at the remaining capacity. Each item can be used once.', 'weights = [1, 2, 3]\nvalues = [6, 10, 12]\n# dp[i][c] = best value using first i items\nfor i in range(1, len(weights)+1):\n    for c in range(capacity+1):\n        dp[i][c] = dp[i-1][c]\n        if weights[i-1] <= c:\n            dp[i][c] = max(dp[i][c], values[i-1] + dp[i-1][c-weights[i-1]])',[
+  step('Define the state','dp[i][c] is the best value using the first i items with capacity c. Start with an empty row of zeros.',lessonTable(['capacity','0','1','2','3'],[['0 items','0','0','0','0']]),'dp[0][c] = 0','No items means no value, regardless of capacity.'),
+  step('Consider the first item','Item 1 weighs 1 and is worth 6. At capacity 1 or greater, taking it is better than skipping.',lessonTable(['capacity','0','1','2','3'],[['after item 1','0','6','6','6']]),'take = 6 + dp[0][c-1]\nskip = dp[0][c]','Choose the larger of take and skip.'),
+  step('Consider the second item','Item 2 weighs 2 and is worth 10. At capacity 3, taking it leaves capacity 1, so total value is 10 + 6 = 16.',lessonTable(['capacity','0','1','2','3'],[['after item 2','0','6','10','16']]),'dp[i][c] = max(skip, take)','Use the previous item row so an item cannot be selected twice.'),
+  step('Choose the best capacity-3 set','The best set is items 1 and 2: total weight 3 and total value 16. Item 3 cannot improve it.',lessonMap([['chosen','weights 1 + 2'],['total weight','3'],['total value','16']]),'return dp[n][capacity]','The table is O(items × capacity) time and space.')
+ ]);
+
  if(dayNo===27&&has('2d/grid dp','coin change','knapsack','lcs','dp state design')){
   return lesson('2D DP: longest common subsequence','dp[i][j] stores the LCS length for the first i characters of A and first j characters of B. Matching characters extend the diagonal; otherwise take the larger neighbour.','A = "abcde"\nB = "ace"\ndp = [[0]*(len(B)+1) for _ in range(len(A)+1)]\nfor i in range(1, len(A)+1):\n    for j in range(1, len(B)+1):\n        if A[i-1] == B[j-1]:\n            dp[i][j] = 1 + dp[i-1][j-1]\n        else:\n            dp[i][j] = max(dp[i-1][j], dp[i][j-1])',[
    step('Define the DP table','Rows represent prefixes of abcde and columns represent prefixes of ace. The first row and column are zero because an empty string has no common subsequence.',lessonTable(['','∅','a','c','e'],[['∅','0','0','0','0'],['a','0','?','?','?'],['b','0','?','?','?'],['c','0','?','?','?'],['d','0','?','?','?'],['e','0','?','?','?']]),'dp = [[0]*(len(B)+1) for _ in range(len(A)+1)]','The state is a prefix pair.'),
@@ -673,6 +719,14 @@ function buildVisualLesson(topic,dayNo){
    step('The pointers meet','The pointers reach the middle e. All outer pairs matched, so the string is a palindrome.',lessonArray(['r','a','c','e','c','a','r'],[3],[0,1,2,4,5,6],['all pairs matched']), 'return True','This uses O(n) time and O(1) extra space.')
   ]);
  }
+
+ if(dayNo===3&&has('kadane'))return lesson('Kadane’s algorithm: maximum subarray','Track the best subarray ending at the current index. Either extend the previous subarray or start fresh at this value.', 'nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]\ncurrent = best = nums[0]\nfor x in nums[1:]:\n    current = max(x, current + x)\n    best = max(best, current)',[
+  step('Start with the first value','The first value is −2. Both the current subarray sum and the best answer begin at −2.',lessonArray([-2,1,-3,4,-1,2,1,-5,4],[0],[],['current = −2','best = −2']),'current = best = nums[0]','The subarray must contain at least one element.'),
+  step('Decide whether to extend','At value 1, extending gives −1, while starting fresh gives 1. Start a new subarray at index 1.',lessonArray([-2,1,-3,4,-1,2,1,-5,4],[1],[0],['max(1, −2 + 1) = 1']),'current = max(x, current + x)','A negative running sum can hurt every future extension.'),
+  step('Find a stronger segment','At value 4, start fresh with 4. Then −1, 2 and 1 extend it to 6.',lessonArray([-2,1,-3,4,-1,2,1,-5,4],[3,4,5,6],[0,1,2],['current = 6','best = 6']),'best = max(best, current)','The best subarray so far is [4, −1, 2, 1].'),
+  step('Finish the scan','The remaining values do not improve 6. The maximum subarray sum is 6.',lessonArray([-2,1,-3,4,-1,2,1,-5,4],[3,4,5,6],[0,1,2,7,8],['answer = 6']),'return best','Kadane’s algorithm is O(n) time and O(1) extra space.')
+ ]);
+
  if(has('matrix','matrices','grid')){
   return lesson('Matrix traversal: visit each cell','A matrix is a 2D grid. Nested loops visit each row and each column exactly once.', 'for r in range(rows):\n    for c in range(cols):\n        visit(grid[r][c])',[
    step('Read the grid dimensions','This grid has 2 rows and 3 columns. A cell is identified by its row and column indices.',lessonTable(['','col 0','col 1','col 2'],[['row 0','1','2','3'],['row 1','4','5','6']]),'rows = 2\ncols = 3','Indices start at zero in Python.'),
