@@ -475,7 +475,7 @@ function visualEscapeHandler(e){if(e.key==='Escape')closeVisualDemo();}
 function openVisualDemo(topic,cfg){
  closeVisualDemo();
  const overlay=create('div','visual-modal-overlay'),dialog=create('section','visual-dialog');dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-labelledby','visual-demo-title');
- const head=create('div','visual-dialog-head'),titles=create('div');titles.append(create('div','visual-kicker','Nami’s mini visual lab · 6-second loop'),create('h3','',cfg.title));const sub=create('p','visual-sub',topic);titles.append(sub);
+ const head=create('div','visual-dialog-head'),titles=create('div'),kicker=create('div','visual-kicker','Nami’s mini visual lab · 6-second loop'),title=create('h3','',cfg.title);title.id='visual-demo-title';titles.append(kicker,title);const sub=create('p','visual-sub',topic);titles.append(sub);
  const close=create('button','visual-close','×');close.type='button';close.setAttribute('aria-label','Close visualisation');close.addEventListener('click',closeVisualDemo);head.append(titles,close);
  const stage=create('div','visual-stage');stage.innerHTML=visualSceneMarkup(cfg.kind);
  const steps=create('div','visual-steps');cfg.steps.forEach((x,i)=>{const el=create('div','visual-step');el.append(create('b','','STEP 0'+(i+1)),document.createTextNode(x));steps.append(el);});
