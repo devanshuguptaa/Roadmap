@@ -508,6 +508,20 @@ function buildVisualLesson(topic,dayNo){
    step('Finish the last window','Remove 5 and add 2. The final window totals 6, so the maximum remains 9.',lessonArray([2,1,5,1,3,2],[3,4,5],[],['− 5 + 2','new sum = 6','best = 9']),'return best','The scan is O(n), instead of O(n × k) recomputation.')
   ]);
  }
+
+ if(dayNo===15&&has('cycle'))return lesson('Linked list cycle: detect a repeated node','A cycle means a next pointer eventually leads back to a node already visited. Floyd’s slow/fast pointers detect it with O(1) extra space.','slow = fast = head\nwhile fast and fast.next:\n    slow = slow.next\n    fast = fast.next.next\n    if slow is fast: return True\nreturn False',[
+  step('Follow the links','The list is 1 → 2 → 3 → 4, and node 4 points back to node 2.',lessonMap([['links','1 → 2 → 3 → 4'],['tail','4 → 2'],['cycle','yes']]),'slow = fast = head','A cyclic list never reaches None.'),
+  step('Move at different speeds','Slow follows one link and fast follows two. Their positions begin to separate around the cycle.',lessonMap([['slow','2'],['fast','3'],['moves','1 and 2 links']]),'slow = slow.next\nfast = fast.next.next','Different speeds create relative movement around the cycle.'),
+  step('Meet inside the cycle','After more moves, both references point to the same node. Identity comparison detects the meeting.',lessonMap([['slow','4'],['fast','4'],['same object?','yes']]),'if slow is fast:\n    return True','Compare node identity, not only node values.'),
+  step('Return the result','The pointers meet, proving that the list contains a cycle. If fast reaches None, no cycle exists.',lessonMap([['result','cycle detected'],['time','O(n)'],['extra space','O(1)']]),'return slow is fast','Floyd’s algorithm does not need a visited set.')
+ ]);
+ if(dayNo===15&&has('merge'))return lesson('Merge two sorted linked lists','Use a dummy head and repeatedly connect the smaller current node. Advance only the list you took from.','dummy = ListNode()\ntail = dummy\nwhile a and b:\n    if a.val <= b.val:\n        tail.next, a = a, a.next\n    else:\n        tail.next, b = b, b.next\n    tail = tail.next\ntail.next = a or b',[
+  step('Start with two sorted lists','List A is 1 → 4 → 7 and list B is 2 → 3 → 8. The dummy node makes the first insertion easy.',lessonMap([['A','1 → 4 → 7'],['B','2 → 3 → 8'],['merged','dummy']]),'dummy = ListNode()\ntail = dummy','The tail marks the last node in the merged list.'),
+  step('Choose the smaller head','Compare 1 and 2. Connect node 1 and advance list A to 4.',lessonMap([['compare','1 vs 2'],['take','1'],['merged','1'],['A now','4 → 7']]),'if a.val <= b.val:\n    tail.next = a\n    a = a.next','The smaller head is always safe to take next.'),
+  step('Continue comparing heads','Compare 4 and 2, then 4 and 3. Take 2 and then 3.',lessonMap([['compare','4 vs 2, then 4 vs 3'],['take','2, then 3'],['merged','1 → 2 → 3']]),'tail = tail.next','Only one input pointer advances per comparison.'),
+  step('Attach the remainder','List B is empty and A contains 4 → 7. Attach the remaining nodes directly.',lessonMap([['remaining A','4 → 7'],['remaining B','None'],['result','1 → 2 → 3 → 4 → 7 → 8']]),'tail.next = a or b','Every node is visited once: O(m+n) time.')
+ ]);
+
  if(dayNo===15||has('linked list','node/pointer','dummy node','iterative/recursive reverse','remove nth','reorder')){
   return lesson('Linked list: reverse the pointers','A linked list is made of nodes that point to the next node. Save the next node before redirecting a link, or the rest of the list is lost.', 'prev = None\ncurr = head\nwhile curr:\n    nxt = curr.next\n    curr.next = prev\n    prev = curr\n    curr = nxt\nhead = prev',[
    step('Start at the head','prev is None and curr is node 1. The original list is 1 → 2 → 3 → None.',lessonMap([['prev','None'],['curr','1'],['next','2']]),'prev = None\ncurr = head','The next pointer of node 1 still leads to node 2.'),
@@ -516,7 +530,7 @@ function buildVisualLesson(topic,dayNo){
    step('Repeat for every node','After repeating the same operation for nodes 2 and 3, prev points to 3 → 2 → 1 → None.',lessonMap([['reversed','3 → 2 → 1 → None'],['prev','3'],['curr','None']]),'head = prev','The new head is the final prev reference. Time O(n), extra space O(1).')
   ]);
  }
- if(dayNo===16||has('stack','bracket','monotonic','greater element','min stack','postfix','lifo')){
+ if(dayNo===16||has('bracket','monotonic stack','greater element','min stack','postfix','lifo')){
   return lesson('Stack: validate matching brackets','A stack is last-in, first-out. Push opening brackets; when a closing bracket appears, it must match the most recent opening bracket.', 'pairs = {")": "(", "]": "[", "}": "{"}\nstack = []\nfor ch in "([])":\n    if ch in "([{":\n        stack.append(ch)\n    elif not stack or stack.pop() != pairs[ch]:\n        return False\nreturn not stack',[
    step('Read the first opening bracket','The character is (. Push it onto the stack. It becomes the top item.',lessonArray(['(','[',']',')'],[0],[],['stack = [ ( ]','top = (']),'stack = []\nstack.append(ch)','Opening brackets are saved until their matching closer arrives.'),
    step('Read the next opening bracket','The character is [. Push it above (. The top is now [, because it was opened most recently.',lessonMap([['bottom','('],['top','['],['stack','(  [']]),'stack.append(ch)','The most recently opened bracket must close first.'),
@@ -540,6 +554,16 @@ function buildVisualLesson(topic,dayNo){
    step('Find the target','low and high are both 4. The middle value is 9, so return index 4.',lessonArray([1,3,5,7,9,11,13],[4],[],['mid = 4','value = 9 ✓','return index 4']),'return mid','The search takes O(log n) comparisons.')
   ]);
  }
+ 
+ if((dayNo===1&&has('sorting'))||has('python sort keys','stable sorting','sweep-line scans')){
+  return lesson('Sorting: make every swap visible','Bubble sort is a teaching example: compare adjacent values and swap them when they are out of order. Python’s built-in sort uses Timsort, not bubble sort.','nums = [5, 1, 4, 2]\nfor end in range(len(nums)-1, 0, -1):\n    for i in range(end):\n        if nums[i] > nums[i+1]:\n            nums[i], nums[i+1] = nums[i+1], nums[i]',[
+   step('Compare adjacent values','The first pair is 5 and 1. They are out of order, so they need to swap.',lessonArray([5,1,4,2],[0,1],[],['compare 5 and 1']),'if nums[i] > nums[i+1]:','Only neighbours are compared in each operation.'),
+   step('Swap the first pair','Swap 5 and 1. The list becomes [1,5,4,2]. Continue with the next adjacent pair.',lessonArray([1,5,4,2],[1,2],[],['swap → [1, 5, 4, 2]']),'nums[i], nums[i+1] = nums[i+1], nums[i]','The larger value moves one position right.'),
+   step('Largest value reaches the end','Swap 5 with 4, then 5 with 2. The first pass ends with 5 in its final position.',lessonArray([1,4,2,5],[1,2],[3],['5 is settled at the end']),'# repeat comparisons until the pass ends','After one full pass, the largest unsorted value is settled.'),
+   step('Finish the next pass','Compare 1 and 4 (no swap), then 4 and 2 (swap). The list is now sorted.',lessonArray([1,2,4,5],[],[0,1,2,3],['sorted ✓']),'# repeat until no swaps remain','Bubble sort is O(n²); Python sort() is the practical choice.')
+  ]);
+ }
+
  if(dayNo===12||has('interval','merge intervals')){
   return lesson('Merge intervals: combine overlaps','Sort intervals by their start. If the next interval begins before the current one ends, extend the current interval; otherwise, save it and start another.', 'intervals = [[1,3], [2,6], [8,10], [9,12]]\nmerged = []\nfor start, end in intervals:\n    if not merged or start > merged[-1][1]:\n        merged.append([start, end])\n    else:\n        merged[-1][1] = max(merged[-1][1], end)',[
    step('Start with the first interval','The first interval [1,3] becomes the current merged interval.',lessonMap([['input','[1,3]'],['merged','[1,3]']]),'merged = [[1, 3]]','We process intervals in sorted order.'),
